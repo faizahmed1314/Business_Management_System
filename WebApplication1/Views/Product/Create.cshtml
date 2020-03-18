@@ -1,0 +1,192 @@
+﻿@model List<WebApplication1.Models.Product>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<div id="CategoryCreatePvDiv"></div>
+<br/>
+<div>
+    <form method="POST" class="form-horizontal" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Code</label>
+                    <div class="col-sm-10">
+                        <input name="Code" type="text" class="form-control" placeholder="Code">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input name="Name" type="text" class="form-control" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Category</label>
+                    <div class="col-sm-8">
+                        
+                        <select name="CategoryId" class="form-control" id="CategoryId"></select>
+                        @*@Html.DropDownListFor(c => c.CategoryId, Model.CategoryLookUp, new {@class = "form-control"})*@
+                        @*<select name="CategoryId" class="form-control">
+                                <option>Select Option</option>
+                                <option value="1">Select 1</option>
+                                <option value="2">Select 2</option>
+                                <option value="3">Select 3</option>
+                            </select>*@
+                    </div>
+                    <div  class="col-sm-2  category-add-icon" style="font-size: 20px">
+                        
+                        <button id="CategoryIcon">Add</button>
+                        <button class="btn btn-warning " data-toggle="modal" data-target="#myModal">
+                            Add
+                        </button>
+                        @*For Modal Add*@
+                        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" aria-hidden="True" data-dismiss="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            Create New Category
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered table-striped table-responsive">
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>
+                                                    <input type="text" name="Name" id="Name" placeholder="Name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Code</td>
+                                                <td>
+                                                    <input type="text" name="Code" id="Code" placeholder="Code" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" id="categorySubmitButton" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Reorder Level</label>
+                    <div class="col-sm-10">
+                        <input name="ReOrderLevel" type="number" class="form-control" placeholder="Reorder Level">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea name="Description" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-10">
+                        <img src="" class="img-responsive img-thumbnail pch-img" id="cntimage" alt="select image">
+                        <input type="file" name="UploadFile" required="required" onchange="readURL(this);">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="text-right col-sm-10">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+    @if (Model != null && Model.Count > 0)
+    {
+        <div>
+            @{var sl = 0;}
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Reorder Level</th>
+                        <th>Image</th>
+                        <th>Discription</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@(++sl)</td>
+                            <td>@product.Code</td>
+                            <td>@product.Name</td>
+                            <td>@product.Category.Name</td>
+                            <td>@product.ReOrderLevel</td>
+                            <td>
+                                @{
+                        var file = Convert.ToBase64String(product.File);
+                        var image = string.Format("data:image/gif; base64," + file + "");
+                                }
+                                <img class="img-responsive img-thumbnail" src="@image" style="width: 100px; height: 100px;" />
+                            </td>
+                            <td>@product.Description</td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Product", new { id = product.Id }, new { @target = "_self" })
+                                @Html.ActionLink("Delete", "Delete", "Product", new { id = product.Id }, new { @target = "_self" })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#cntimage')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+

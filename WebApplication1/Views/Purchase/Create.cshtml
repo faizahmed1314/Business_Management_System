@@ -1,0 +1,165 @@
+﻿@model WebApplication1.Models.Purchase
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<div>
+    <form method="POST" class="form-horizontal" enctype="multipart/form-data">
+
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Supplier</div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-10">
+                            <input name="Date" type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Bill No</label>
+                        <div class="col-sm-10">
+                            <input name="BillNo" type="text" class="form-control" placeholder="Bill No">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Supplier</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(c => c.SupplierId, Model.SupplierLookUp, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <br />
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Products</div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Product</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(c => c.ProductId, Model.ProductLookUp, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Code</label>
+                        <div class="col-sm-10" id="code">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Manufacture Date</label>
+                        <div class="col-sm-10">
+                            <input name="ManufactureDate" id="manufactureDate" type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Expire Date</label>
+                        <div class="col-sm-10">
+                            <input name="ExpireDate" id="expireDate" type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Purchased Quantity</label>
+                        <div class="col-sm-10">
+                            <input name="Quantity" type="text" class="form-control" id="quantity">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Unit Price</label>
+                        <div class="col-sm-10">
+                            <input name="UnitPrice" type="text" class="form-control" id="unitPrice">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Total Price</label>
+                        <div class="col-sm-10" id="total">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Previous Cost Price</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Previous MRP</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">New Cost Price</label>
+                        <div class="col-sm-10" id="newCostPrice">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">New MRP</label>
+                        <div class="col-sm-10" id="mrp">
+                            <input name="MRP" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                @*<button type="submit" class="btn btn-success">Save</button>*@
+                <input type="button" class="btn btn-info" id="AddButton" value="Add" />
+            </div>
+        </div>
+
+
+
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Added Purchase Details Items</div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-striped table-responsive">
+
+                        <thead>
+                            <tr style="background-color: goldenrod; color: white; font-weight: bold">
+                                <td>Sl</td>
+                                <td>Products(Code)</td>
+                                <td>Manufactured Date</td>
+                                <td>Expire Date</td>
+                                <td>Purchased Quantity</td>
+                                <td>Unit Price</td>
+                                <td>Total Price</td>
+                                @*<td>Previous CP</td>
+                                    <td>Previous MRP</td>*@
+                                <td>New MRP</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody id="PurchaseDetailsTable"></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@section scripts{
+    
+<script src="~/Scripts/ProjectScripts/Purchase/PurchaseCreate.js"></script>
+}

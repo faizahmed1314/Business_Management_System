@@ -1,0 +1,127 @@
+﻿@model WebApplication1.Models.Sale
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Sale</h2>
+
+<div>
+    <form method="POST" class="form-horizontal" enctype="multipart/form-data">
+
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Customer</div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Customer</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(c => c.CustomerId, Model.CustomerLookup, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-10">
+                            <input name="Date" type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Loyality Point</label>
+                        <div class="col-sm-10" id="loyalityPoint">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br />
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Products</div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Product</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(c => c.ProductId, Model.ProductLookup, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Available Quantity</label>
+                        <div class="col-sm-10" id="avQuantity">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Unit Price</label>
+                        <div class="col-sm-10" id="unitPrice">
+                            <input name="UnitPrice" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Quantity</label>
+                        <div class="col-sm-10">
+                            <input name="Quantity" type="text" class="form-control" id="quantity">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                @*<button type="submit" class="btn btn-success">Save</button>*@
+                <input type="button" class="btn btn-info" id="AddButton" value="Add" />
+            </div>
+        </div>
+
+
+
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Added Sale Details Items</div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-striped table-responsive">
+
+                        <thead>
+                            <tr style="background-color: goldenrod; color: white; font-weight: bold">
+                                <td>Sl</td>
+                                <td>Product</td>
+                                <td>Quantity</td>
+                                <td>Unit Price</td>
+                                <td>Total Price</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody id="SaleDetailsTable"></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-8 control-label">Grand Total</label>
+            <div class="col-sm-4" id="grandTotal">
+                <input type="text" name="GrandTotalValue" class="form-control" id="grandTotalValue" value="1600">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    
+<script src="~/Scripts/ProjectScripts/Sale/SaleCreate.js"></script>
+}

@@ -1,0 +1,137 @@
+﻿@model List<WebApplication1.Models.Customer>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Registration</h2>
+
+
+
+<div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-save my-5">
+            <div class="card-body">
+                <h5 class="card-title text-center"><strong>Customer Entity</strong></h5>
+                <form method="POST" class="form-save" enctype="multipart/form-data">
+                    <div class="form-label-group">
+                        <label for="inputCode"> Code</label>
+                        <input type="text" id="Code" name="Code" class="form-control" placeholder="Customer Code" required autofocus>
+
+                    </div>
+                    <div class="form-label-group">
+                        <label for="inputName"> Name</label>
+                        <input type="text" id="Name" name="Name" class="form-control" placeholder="Customer Name" required autofocus>
+
+                    </div>
+                    <div class="form-label-group">
+                        <label for="inputAddress"> Address</label>
+                        <input type="text" id="Address" name="Address" class="form-control" placeholder="Customer Address" required autofocus>
+
+                    </div>
+                    <div class="form-label-group">
+                        <label for="inputEmail"> Email</label>
+                        <input type="text" id="Email" name="Email" class="form-control" placeholder="Customer Email" required autofocus>
+
+                    </div>
+                    <div class="form-label-group">
+                        <label for="inputNumber">Contact Number</label>
+                        <input type="text" id="ContactNumber" name="ContactNumber" class="form-control" placeholder="Customer Contact Number" required autofocus>
+
+                    </div>
+                    <div class="form-label-group">
+                        <label for="inputContactName">Loyalty Point</label>
+                        <input type="number" id="ContactPerson" name="LoyaltyPoint" class="form-control" placeholder="Loyalty Point" required autofocus>
+
+                    </div>
+                    <br />
+                    <div>
+                        <label class="col-sm-2 control-label">Image</label>
+                        <div class="col-sm-10">
+                            <img src="" class="img-responsive img-thumbnail pch-img" id="cntimage" alt="select image">
+                            
+                            <input type="file" name="UploadFile" required="required" onchange="readURL(this);">
+                        </div>
+                    </div>
+                    <br />
+                    <br/>
+                    <button class="btn btn-lg btn-info btn-block text-uppercase" type="submit">Save</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<br/>
+<div>
+    @Html.ActionLink("Back To Index", "Index")
+</div>
+@if (Model != null && Model.Count > 0)
+{
+    <div>
+        @{var sl = 0;}
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Sl</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Loyalty Point</th>
+                    <th>Image</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@(++sl)</td>
+                        <td>@customer.Code</td>
+                        <td>@customer.Name</td>
+                        <td>@customer.Address</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.ContactNumber</td>
+                        <td>@customer.LoyaltyPoint</td>
+
+                        <td>
+                            @{
+                    var file = Convert.ToBase64String(customer.File);
+                    var image = string.Format("data:image/gif; base64," + file + "");
+                            }
+                            <img class="img-responsive img-thumbnail" src="@image" style=" width: 100px; height: 100px;" />
+                        </td>
+
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id }, new { @target = "_self" })
+                            @Html.ActionLink("Delete", "Delete", "Customer", new { id = customer.Id }, new { @target = "_self" })
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#cntimage')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
