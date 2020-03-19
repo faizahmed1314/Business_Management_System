@@ -130,6 +130,7 @@
     <Compile Include="BAL\CustomerManager.cs" />
     <Compile Include="BAL\ProductManager.cs" />
     <Compile Include="BAL\PurchaseManager.cs" />
+    <Compile Include="BAL\SaleManager.cs" />
     <Compile Include="BAL\SupplierManager.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="DLL\CustomerRepository.cs" />
     <Compile Include="DLL\ProductRepository.cs" />
     <Compile Include="DLL\PurchaseRepository.cs" />
+    <Compile Include="DLL\SaleRepository.cs" />
     <Compile Include="DLL\SupplierRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -25,8 +25,8 @@ $(document.body).on("change", "#ProductId", function () {
     var ProductId = $(this).val();
     if (ProductId > 0) {
 
-        var url = subdirectory + "Sale/GetProductById";
-        var params = { ProductId: ProductId };
+        var url = subdirectory + "Sale/GetByProductId";
+        var params = { id: ProductId };
         $.post(url, params, function (rData) {
             if (rData != undefined) {
                 $("#avQuantity").empty();
