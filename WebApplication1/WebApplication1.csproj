@@ -126,12 +126,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BAL\AccountManager.cs" />
     <Compile Include="BAL\CategoryManager.cs" />
     <Compile Include="BAL\CustomerManager.cs" />
     <Compile Include="BAL\ProductManager.cs" />
     <Compile Include="BAL\PurchaseManager.cs" />
     <Compile Include="BAL\SaleManager.cs" />
     <Compile Include="BAL\SupplierManager.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="DatabaseContext\BmsContext.cs" />
+    <Compile Include="DLL\AccountRepository.cs" />
     <Compile Include="DLL\CategoryRepository.cs" />
     <Compile Include="DLL\CustomerRepository.cs" />
     <Compile Include="DLL\ProductRepository.cs" />
@@ -172,6 +175,10 @@
     <Compile Include="Migrations\202002201716023_SaleAndSaleDetailsModelAdded.designer.cs">
       <DependentUpon>202002201716023_SaleAndSaleDetailsModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003211602142_User_Account_Model_Added.cs" />
+    <Compile Include="Migrations\202003211602142_User_Account_Model_Added.designer.cs">
+      <DependentUpon>202003211602142_User_Account_Model_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -181,6 +188,7 @@
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\SaleDetails.cs" />
     <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\ViewModels\Category\CategoryCreateVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,6 +206,11 @@
     <Content Include="Views\Sale\Create.cshtml" />
     <Content Include="Views\Purchase\Index.cshtml" />
     <Content Include="Views\Shared\Category\_CategoryCreatePv.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002201716023_SaleAndSaleDetailsModelAdded.resx">
       <DependentUpon>202002201716023_SaleAndSaleDetailsModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003211602142_User_Account_Model_Added.resx">
+      <DependentUpon>202003211602142_User_Account_Model_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

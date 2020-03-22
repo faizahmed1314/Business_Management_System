@@ -17,6 +17,7 @@ namespace WebApplication1.DatabaseContext
         public DbSet<PurchaseDetails> PurchaseDetailses { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetails> SaleDetailses { get; set; }
+        public DbSet<UserAccount> UserAccounts { get; set; }
 
     }
 }

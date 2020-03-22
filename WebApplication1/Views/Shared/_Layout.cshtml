@@ -17,10 +17,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("Business Management System", "Home", "Account", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Category", "Index", "Category")</li>
+                    <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                    <li>@Html.ActionLink("Supplier", "Index", "Supplier")</li>
+                    <li>@Html.ActionLink("Product", "Index", "Product")</li>
+                    <li>@Html.ActionLink("Purchase", "Index", "Purchase")</li>
+                    <li>@Html.ActionLink("Sale", "Create", "Sale")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if (Session["UserId"] != null)
+                    {
+                        <h5 style="color: white">Hello @Session["UserName"]</h5>
+                        <h5>@Html.ActionLink("Logout", "Logout", "Account")</h5>
+                    }
+                    else
+                    {
+                        @Html.Partial("_LoginPartial")
+                    }
+
                 </ul>
             </div>
         </div>
