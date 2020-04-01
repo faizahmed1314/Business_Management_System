@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebApplication1.DatabaseContext;
 using WebApplication1.Models;
 
@@ -70,6 +71,40 @@ namespace WebApplication1.DLL
                 return true;
             }
             return false;
+        }
+
+        public List<SelectListItem> GetCategorySelectListItems()
+        {
+            var categoryList = _db.Categories.ToList();
+
+            var categorySelectListItems = new List<SelectListItem>();
+
+            categorySelectListItems.AddRange(GetDefaultSelectListItem());
+
+            if (categoryList != null && categoryList.Count > 0)
+            {
+                foreach (var category in categoryList)
+                {
+                    var selectListItem = new SelectListItem();
+                    selectListItem.Text = category.Name;
+                    selectListItem.Value = category.Id.ToString();
+
+                    categorySelectListItems.Add(selectListItem);
+                }
+            }
+            return categorySelectListItems;
+        }
+
+
+
+        public List<SelectListItem> GetDefaultSelectListItem()
+        {
+            var dataList = new List<SelectListItem>();
+            var defaultSelectListItem = new SelectListItem();
+            defaultSelectListItem.Text = "---Select---";
+            defaultSelectListItem.Value = "";
+            dataList.Add(defaultSelectListItem);
+            return dataList;
         }
     }
 }

@@ -1,19 +1,22 @@
 ﻿var subdirectory = "../../";
 
-$("#categorySubmitButton").click(function() {
-    var url = subdirectory + "Product/CreateCategory";
-    $.post(url, function(rData) {
-        if (rData != undefined) {
-            alert('Category Save Successful');
-        }
-    });
-});
+//$("#categorySubmitButton").click(function() {
+//    var url = subdirectory + "Product/CreateCategory";
+//    $.post(url, function(rData) {
+//        if (rData != undefined) {
+//            alert('Category Save Successful');
+//        }
+//    });
+//});
 
 //For Create New Category 
 $("#CategoryIcon").click(function() {
     var url = subdirectory + "Product/GetCategoryPv";
     $.post(url, function(rData) {
         $("#CategoryCreatePvDiv").html(rData);
+        //$("#modalPartialViewDiv").html(rData);
+        //$("#myModal").modal("show");
+
     });
 
 });

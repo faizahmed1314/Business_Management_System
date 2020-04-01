@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
     public class SaleController : Controller
     {
         SaleManager _saleManager=new SaleManager();
-        private BmsContext _db;
+       
        
         //
         // GET: /Sale/
@@ -41,9 +41,6 @@ namespace WebApplication1.Controllers
                     customer.LoyaltyPoint = (int)(customer.LoyaltyPoint + GrandTotalValue) / 1000;
                     var isUpdated = _saleManager.Update(customer);
                 }
-                
-                
-
                 
             }
             return View();

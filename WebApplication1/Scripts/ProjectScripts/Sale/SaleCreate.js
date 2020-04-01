@@ -84,8 +84,8 @@ function createRowForSale() {
     $("#SaleDetailsTable").append(newRow);
     $("#ProductId").val("");
     $("#quantity").val("");
-    $("#unitPriceValue").val("");
-    $("#avQuantityValue").val("");
+    $("#unitPrice").val("");
+    $("#avQuantity").val("");
 
 }
 function getSelectedItem() {
@@ -93,8 +93,8 @@ function getSelectedItem() {
     var productName = $("#ProductId option:selected").text();
 
     var quantity = $("#quantity").val();
-    var unitPrice = $("#unitPriceValue").val();
-    var totalPrice = $("#quantity").val() * $("#unitPriceValue").val();
+    var unitPrice = $("#unitPrice").val();
+    var totalPrice = $("#quantity").val() * $("#unitPrice").val();
     var item = {
         "ProductName": productName,
         "ProductId": productId,

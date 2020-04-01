@@ -18,6 +18,7 @@ namespace WebApplication1.Models.ViewModels.Category
         [Required]
         [Display(Name = "Item Code")]
         public string Code { get; set; }
+
         public ICollection<Product> Products { get; set; }
     }
 }

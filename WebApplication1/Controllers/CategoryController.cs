@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using WebApplication1.BAL;
 using WebApplication1.DatabaseContext;
 using WebApplication1.Models;
+using WebApplication1.Models.ViewModels.Category;
 
 namespace WebApplication1.Controllers
 {
@@ -29,8 +30,14 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create(CategoryCreateVm entity)
         {
+            var category = new Category()
+            {
+                Name = entity.Name,
+                Code = entity.Code
+            };
+
             if (ModelState.IsValid)
             {
                 bool isSaved=_categoryManager.Save(category);
@@ -50,8 +57,14 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind (Include = "Id,Name,Code")] Category category)
+        public ActionResult Edit(CategoryCreateVm entity)
         {
+            var category = new Category()
+            {
+                Name = entity.Name,
+                Code = entity.Code
+            };
+
             if (ModelState.IsValid)
             {
                 _categoryManager.UpdateCategory(category);

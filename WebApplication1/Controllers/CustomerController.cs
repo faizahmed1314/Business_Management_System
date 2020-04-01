@@ -12,8 +12,8 @@ namespace WebApplication1.Controllers
 {
     public class CustomerController : Controller
     {
-         
-        CustomerManager _customerManager=new CustomerManager();
+
+        CustomerManager _customerManager = new CustomerManager();
         //
         // GET: /Customer/
 
@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        
+
         //public ActionResult Create(Customer customer)
         //{
         //    try
@@ -67,9 +67,10 @@ namespace WebApplication1.Controllers
         //}
 
         [HttpPost]
-        
+
         public ActionResult Create(Customer customer)
         {
+
             if (ModelState.IsValid)
             {
                 var fileByte = new byte[customer.UploadFile.ContentLength];
@@ -78,8 +79,10 @@ namespace WebApplication1.Controllers
                 customer.FileName = customer.UploadFile.FileName;
 
                 _customerManager.Save(customer);
-                
+
                 return RedirectToAction("Index");
+
+
             }
             return View("Create");
         }
@@ -94,18 +97,18 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Customer customer)
         {
-            
-                if (ModelState.IsValid)
-                {
-                    var fileByte = new byte[customer.UploadFile.ContentLength];
-                    customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
-                    customer.File = fileByte;
-                    customer.FileName = customer.UploadFile.FileName;
 
-                    _customerManager.Update(customer);
-                    return RedirectToAction("Index");
-                }
-            
+            if (ModelState.IsValid)
+            {
+                var fileByte = new byte[customer.UploadFile.ContentLength];
+                customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
+                customer.File = fileByte;
+                customer.FileName = customer.UploadFile.FileName;
+
+                _customerManager.Update(customer);
+                return RedirectToAction("Index");
+            }
+
             return View(customer);
         }
 
@@ -118,8 +121,8 @@ namespace WebApplication1.Controllers
                 _customerManager.Delete(customer);
                 return RedirectToAction("Index");
             }
-            
+
             return RedirectToAction("Index");
         }
-	}
+    }
 }
