@@ -130,3 +130,34 @@ $(document.body).on("click", ".deleteButton", function () {
     $("#row" + index).remove();
 
 });
+
+
+
+//check if bill no is exist
+
+$("#BillTextBox").keyup(function () {
+
+    var billValue = $(this).val();
+    if (billValue != undefined && billValue != "") {
+
+        //-------------Key---Value
+        var params = { bill: billValue };
+        $.ajax({
+            type: "POST",
+            url: "../Purchase/IsBillNoExist",
+            contentType: "application/Json; charset=utf-8",
+            data: JSON.stringify(params),
+            success: function (rData) {
+                if (rData !== false && rData != undefined) {
+                    $("#BillSpan").text(rData);
+                    //var btn = "<input type='button' value='Close' class='btn btn-info'>";
+
+                    $("#ButtonDiv").html(btn);
+                } else {
+                    $("#BillSpan").text("");
+                    //$("#ButtonDiv").html("");
+                }
+            }
+        });
+    }
+});

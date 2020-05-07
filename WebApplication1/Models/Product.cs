@@ -17,14 +17,16 @@ namespace WebApplication1.Models
         public byte[] File { get; set; }
         public string FileName { get; set; }
 
+        [NotMapped]
+        public HttpPostedFileBase UploadFile { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
         [NotMapped]
         public List<SelectListItem> CategoryLookUp { get; set; }
 
-        [NotMapped]
-        public HttpPostedFileBase UploadFile { get; set; }
+        
+        
 
     }
 }

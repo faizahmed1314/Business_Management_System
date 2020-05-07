@@ -1,95 +1,93 @@
 ﻿@model WebApplication1.Models.Sale
+
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add";
 }
 
-<h2>Sale</h2>
-
-<div>
-    <form method="POST" class="form-horizontal" enctype="multipart/form-data">
-
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <br /><br /><br />
         <div class="panel-group">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div class="panel-title">Customer</div>
+                    <div class="panel-title">
+                        Sale Header
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Customer</label>
+                        @Html.LabelFor(c => c.CustomerId, "Customer *", new { @class = "control-label col-sm-2" })
                         <div class="col-sm-10">
-                            @Html.DropDownListFor(c => c.CustomerId, Model.CustomerLookup, new { @class = "form-control" })
+                            @Html.DropDownListFor(c => c.CustomerId, Model.CustomerLookup, null, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Date</label>
+                        @Html.LabelFor(c => c.DateTime, "Date *", new { @class = "control-label col-sm-2" })
                         <div class="col-sm-10">
-                            <input name="Date" type="date" class="form-control">
+                            @Html.TextBoxFor(c => c.DateTime, null, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Loyality Point</label>
-                        <div class="col-sm-10" id="loyalityPoint">
-                            <input type="text" class="form-control">
+                        <div class="col-sm-10" >
+                            <input type="text" class="form-control" id="loyalityPoint" readonly="readonly">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <br />
         <div class="panel-group">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div class="panel-title">Products</div>
+                    <div class="panel-title">
+                        Customer Details
+                    </div>
                 </div>
                 <div class="panel-body">
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Product</label>
                         <div class="col-sm-10">
-                            @Html.DropDownListFor(c => c.ProductId, Model.ProductLookup, new { @class = "form-control" })
+                            @Html.DropDownList("ItemName", Model.ProductLookup, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Available Quantity</label>
-                        <div class="col-sm-10" id="avQuantity">
-                            <input type="text" class="form-control">
+                        <div class="col-sm-10" >
+                            <input type="text" class="form-control" id="avQuantity" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Unit Price</label>
-                        <div class="col-sm-10" id="unitPrice">
-                            <input name="UnitPrice" type="text" class="form-control" id="unitPrice">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Quantity</label>
+                        @Html.Label("ItemPrice", "Item Price *", new { @class = "control-label col-sm-2" })
                         <div class="col-sm-10">
-                            <input name="Quantity" type="text" class="form-control" id="quantity">
+                            @Html.TextBox("ItemPrice", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("ItemQty", "Item Quantity *", new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-10">
+                            @Html.TextBox("ItemQty", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-info" id="AddButton">Add</button>
+
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                @*<button type="submit" class="btn btn-success">Save</button>*@
-                <input type="button" class="btn btn-info" id="AddButton" value="Add" />
-            </div>
-        </div>
-
-
-
         <div class="panel-group">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="panel-title">Added Sale Details Items</div>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-bordered table-hover table-striped table-responsive">
+                    <table class="table table-bordered table-hover table-striped table-responsive" id="table">
 
                         <thead>
                             <tr style="background-color: goldenrod; color: white; font-weight: bold">
@@ -101,27 +99,60 @@
                                 <td>Action</td>
                             </tr>
                         </thead>
-                        <tbody id="SaleDetailsTable"></tbody>
+                        <tbody id="SaleDetailsTable">
+                            @*@if (Model!=null && Model.SaleDetailses != null && Model.SaleDetailses.Count > 0)
+                            {
+                                 var sl = 0; 
+                                foreach (var item in Model.SaleDetailses)
+                                {
+
+                                    <tr>
+                                        <td>@(++sl)</td>
+                                        <td>@item.ProductId</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.UnitPrice</td>
+                                        
+                                    </tr>
+                                }
+
+
+                            }*@
+                        </tbody>
 
                     </table>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-8 control-label">Grand Total</label>
-            <div class="col-sm-4" id="grandTotal">
-                <input type="text" name="GrandTotalValue" class="form-control" id="grandTotalValue" value="1600">
+
+
+    </div>
+
+    <div class="panel-group">
+        <div class="panel-body">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="col-sm-8 control-label">Grand Total</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="GrandTotalValue" class="form-control" id="grandTotalValue" value="">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-6">
+                <div class="col-sm-10">
+                    <input type="submit" class="btn btn-success" value="Save" />
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-success">Save</button>
-            </div>
-        </div>
-    </form>
-</div>
+    </div>
+}
+
+
 
 @section scripts{
-    
-<script src="~/Scripts/ProjectScripts/Sale/SaleCreate.js"></script>
+
+    <script src="~/Scripts/ProjectScripts/Sale/SaleCreate.js"></script>
 }
+
+

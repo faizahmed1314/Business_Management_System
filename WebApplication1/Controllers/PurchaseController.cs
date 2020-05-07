@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using WebApplication1.BAL;
 using WebApplication1.DatabaseContext;
@@ -11,6 +12,7 @@ namespace WebApplication1.Controllers
 {
     public class PurchaseController : Controller
     {
+        
 
         PurchaseManager _purchaseManager=new PurchaseManager();
         //
@@ -44,6 +46,16 @@ namespace WebApplication1.Controllers
                 //return RedirectToAction("Index");
             }
             return View(purchase);
+        }
+
+        public JsonResult IsBillNoExist(string bill)
+        {
+            var data = _purchaseManager.IsBillNoExist(bill);
+            if (data != null)
+            {
+                return Json("Sorry! This bill no is exist.");
+            }
+            return Json(false);
         }
 
         public List<SelectListItem> GetSupplierSelectListItems()
@@ -98,6 +110,7 @@ namespace WebApplication1.Controllers
         public JsonResult GetByProductId(int id)
         {
             var product = _purchaseManager.GetProductById(id);
+
             var jsonData = product.Select(c => new {c.Id, c.Code});
             return Json(jsonData, JsonRequestBehavior.AllowGet);
 

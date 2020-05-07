@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 var fileByte = new byte[product.UploadFile.ContentLength];
-                product.UploadFile.InputStream.Read(fileByte, 0, product.UploadFile.ContentLength);
+                product.UploadFile.InputStream.Read(fileByte,0, product.UploadFile.ContentLength);
                 product.File = fileByte;
                 product.FileName = product.UploadFile.FileName;
 
@@ -75,9 +75,9 @@ namespace WebApplication1.Controllers
             {
                 Product product = _productManager.GetProductById(id);
                 _productManager.Delete(product);
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
 
         public ActionResult GetCategoryPv()
@@ -87,10 +87,11 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+       
         public ActionResult CreateCategory(Category category)
         {
             var categoryItem=_productManager.CreateCategory(category); 
-            return Json(category,JsonRequestBehavior.AllowGet);
+            return Json(categoryItem, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetAllCategory()

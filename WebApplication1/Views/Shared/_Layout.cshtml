@@ -32,7 +32,7 @@
 
                     @if (Session["UserId"] != null)
                     {
-                        <h5 style="color: white">Hello @Session["UserName"]</h5>
+                        <h5> style="color: white">Hello @Session["UserName"]</h5>
                         <h5>@Html.ActionLink("Logout", "Logout", "Account")</h5>
                     }
                     else
@@ -48,6 +48,9 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        
+    </div>
+    <div class="text-right">
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>

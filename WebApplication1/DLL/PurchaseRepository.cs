@@ -42,5 +42,11 @@ namespace WebApplication1.DLL
         {
            return _db.Products.ToList();
         }
+
+        public Purchase IsBillNoExist(string bill)
+        {
+            var purchase = _db.Purchases.Where(c => c.BillNo == bill).FirstOrDefault();
+            return purchase;
+        }
     }
 }

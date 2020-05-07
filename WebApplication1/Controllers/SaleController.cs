@@ -13,10 +13,11 @@ namespace WebApplication1.Controllers
     public class SaleController : Controller
     {
         SaleManager _saleManager=new SaleManager();
-       
-       
+
+
         //
         // GET: /Sale/
+       
         public ActionResult Create()
         {
             var model = new Sale();
@@ -32,27 +33,28 @@ namespace WebApplication1.Controllers
             sale.CustomerLookup = _saleManager.GetCustomerSelectListItems();
             sale.ProductLookup = _saleManager.GetProductSelectListItems();
 
-            if (ModelState.IsValid && sale.SaleDetailses != null && sale.SaleDetailses.Count > 0)
+            if (sale.SaleDetailses != null && sale.SaleDetailses.Count > 0)
             {
+                sale.DateTime = DateTime.Now;
                 var save = _saleManager.Save(sale);
                 if (save)
                 {
                     Customer customer = _saleManager.GetCustomerById(customerId);
                     customer.LoyaltyPoint = (int)(customer.LoyaltyPoint + GrandTotalValue) / 1000;
                     var isUpdated = _saleManager.Update(customer);
+                    return View(sale);
                 }
                 
             }
             return View();
         }
 
-      
-
+        
         public JsonResult GetByProductId(int id)
         {
 
             var dataList = _saleManager.GetByProductId(id);
-            var jsonData = dataList.Select(c => new { c.UnitPrice, c.Quantity });
+            var jsonData = dataList.Select(c => new {c.Quantity });
             return Json(jsonData, JsonRequestBehavior.AllowGet);
 
         }

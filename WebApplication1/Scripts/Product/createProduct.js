@@ -1,6 +1,7 @@
 ﻿var subdirectory = "../../";
 
-//$("#categorySubmitButton").click(function() {
+
+//$(document.body).on("click", "#categorySubmitButton", function () {
 //    var url = subdirectory + "Product/CreateCategory";
 //    $.post(url, function(rData) {
 //        if (rData != undefined) {

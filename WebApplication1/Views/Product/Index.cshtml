@@ -10,7 +10,11 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table table-bordered">
+    @{ var sl = 0;}
     <tr>
+        <th>
+            Serial No
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -24,12 +28,14 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FileName)
+            Image
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CategoryId)
         </th>
-        <th></th>
+        <th>
+            Action
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -39,6 +45,9 @@
 
 
             <tr>
+                <td>
+                    @(++sl)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -52,7 +61,11 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FileName)
+                    @{
+                        var file = Convert.ToBase64String(item.File);
+                        var image = string.Format("data:image/gif; base64," + file + "");
+                    }
+                    <img class="img-responsive img-thumbnail" src="@image" style="width: 100px; height: 100px;" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CategoryId)

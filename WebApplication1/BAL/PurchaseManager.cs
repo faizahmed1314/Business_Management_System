@@ -36,5 +36,10 @@ namespace WebApplication1.BAL
         {
             return _purchaseRepository.GetAllProduct();
         }
+
+        public Purchase IsBillNoExist(string bill)
+        {
+            return _purchaseRepository.IsBillNoExist(bill);
+        }
     }
 }

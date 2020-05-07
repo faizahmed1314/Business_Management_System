@@ -11,11 +11,14 @@ namespace WebApplication1.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name ="First Name")]
         [Required(ErrorMessage = "First Name is required!")]
         [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required!")]
+        [Display(Name = "Last Name")]
+
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email is required!")]
@@ -23,6 +26,8 @@ namespace WebApplication1.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "User Name is required!")]
+        [Display(Name = "User Name")]
+
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Password is required!")]
@@ -31,6 +36,7 @@ namespace WebApplication1.Models
 
         [Compare("Password",ErrorMessage = "Please Confirm your password!")]
         [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
 
     }
