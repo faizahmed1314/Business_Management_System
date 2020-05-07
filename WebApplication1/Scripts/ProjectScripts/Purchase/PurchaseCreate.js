@@ -70,6 +70,7 @@ function createRowForPurchase() {
     //For Serial No For UI
     var slTd = "<td id='Sl" + index + "'> " + (++sl) + " </td>";
 
+
     var productId = "<td> <input type='hidden' id='productId" + index + "'  name='PurchaseDetailses[" + index + "].ProductId' value='" + selectedItem.ProductId + "' /> " + selectedItem.Code + " </td>";
     var manufactureDate = "<td> <input type='hidden' id='manufactureDate" + index + "'  name='PurchaseDetailses[" + index + "].ManufactureDate' value='" + selectedItem.ManufactureDate + "' /> " + selectedItem.ManufactureDate + " </td>";
     var expireDate = "<td> <input type='hidden' id='expireDate" + index + "'  name='PurchaseDetailses[" + index + "].ExpireDate' value='" + selectedItem.ExpireDate + "' /> " + selectedItem.ExpireDate + " </td>";

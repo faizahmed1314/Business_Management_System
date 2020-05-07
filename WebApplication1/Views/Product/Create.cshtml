@@ -7,7 +7,12 @@
 <h2>Create</h2>
 
 <div id="CategoryCreatePvDiv"></div>
-<br />
+
+<div>
+    <h2 class="text-info">
+        Update Product
+    </h2>
+</div>
 <div>
     <form method="POST" class="form-horizontal" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
@@ -84,7 +89,9 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <h3>
+        @Html.ActionLink("Back to List", "Index")
+    </h3>
 </div>
 
 @*For Modal Add*@

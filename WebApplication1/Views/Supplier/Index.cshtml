@@ -6,11 +6,22 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="row">
+    <div class="col-lg-6">
+        <h2 class="text-info">Supplier Index Page</h2>
+    </div>
+    <div class="col-lg-6">
+        <h2>
+            @Html.ActionLink("Create New", "Create")
+        </h2>
+    </div>
+</div>
+<br />
 <table class="table table-bordered">
-    <tr>
+    <tr style="background-color: teal; color: white; font-weight: bold">
+        <th>
+            Serial
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Code)
         </th>
@@ -32,9 +43,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FileName)
         </th>
-        <th></th>
+        <th>Action</th>
     </tr>
-
+    @{var sl = 0; }
     @foreach (var item in Model)
     {
 
@@ -43,6 +54,9 @@
 
 
             <tr>
+                <td>
+                    @(++sl)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Code)
                 </td>
@@ -67,10 +81,29 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
-                    <input type="submit" value="Delete" onclick="return confirm('Are you sure to delete this record with Id=@item.Id and Email=@item.Email');" />
+                    <input type="submit" class=" btn-warning" value="Delete" onclick="return confirm('Are you sure to delete this record with Id=@item.Id and Email=@item.Email');" />
                 </td>
             </tr>
         }
     }
 
 </table>
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var save = '@TempData["save"]';
+            var edit = '@TempData["Edit"]';
+            var remove = '@TempData["delete"]';
+
+
+            if (save != '') {
+                alertify.success(save);
+            } else if (edit != '') {
+                alertify.success(edit);
+            } else if (remove != '') {
+                alertify.error(remove);
+            }
+
+        });
+    </script>
+}

@@ -79,7 +79,7 @@ namespace WebApplication1.Controllers
                 customer.FileName = customer.UploadFile.FileName;
 
                 _customerManager.Save(customer);
-
+                TempData["save"] = "Successfully Saved";
                 return RedirectToAction("Index");
 
 
@@ -106,6 +106,7 @@ namespace WebApplication1.Controllers
                 customer.FileName = customer.UploadFile.FileName;
 
                 _customerManager.Update(customer);
+                TempData["Edit"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
 
@@ -119,6 +120,7 @@ namespace WebApplication1.Controllers
             {
                 Customer customer = _customerManager.GetCustomerById(id);
                 _customerManager.Delete(customer);
+                TempData["delete"] = "Customer deleted!";
                 return RedirectToAction("Index");
             }
 

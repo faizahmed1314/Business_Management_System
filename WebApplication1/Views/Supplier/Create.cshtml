@@ -3,13 +3,13 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Supplier Registration</h2>
+<h4>Supplier Registration</h4>
 
 <div class="row">
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-save my-5">
             <div class="card-body">
-                <h5 class="card-title text-center"><strong>Supplier Entity</strong></h5>
+                <h2 class="card-title text-center"><strong>Supplier Entity</strong></h2>
                 <form method="POST" class="form-save" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
 
@@ -63,9 +63,10 @@
 
     </div>
 </div>
-<br />
 <div>
-    @Html.ActionLink("Back To Index", "Index")
+    <h3>
+        @Html.ActionLink("Back To Index", "Index")
+    </h3>
 </div>
 @if (Model != null && Model.Count > 0)
 {

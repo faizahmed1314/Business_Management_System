@@ -33,11 +33,14 @@ $(document.body).on("change", "#ItemName", function () {
                 //$("#avQuantity").empty();
                 //$("#unitPrice").empty();
                 document.getElementById("avQuantity").value = "0";
+                document.getElementById("ItemPrice").value = "";
 
                 $.each(rData, function (k, v) {
 
                     var avQuantity = v.Quantity; 
+                    var mrp = v.MRP;
                     document.getElementById("avQuantity").value = avQuantity;
+                    document.getElementById("ItemPrice").value = v.MRP;
 
                      //var avQuantity = "<input class=form-control value='" + v.Quantity + "' readonly>";
                     //$("#avQuantity").append(avQuantity);
@@ -48,6 +51,8 @@ $(document.body).on("change", "#ItemName", function () {
 
             } else {
                 document.getElementById("avQuantity").value = "";
+                document.getElementById("ItemPrice").value = "";
+
 
                 //$("#avQuantity").empty();
                 //$("#unitPrice").empty();

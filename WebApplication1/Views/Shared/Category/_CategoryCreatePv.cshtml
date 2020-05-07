@@ -7,8 +7,8 @@
     OnFailure = "CategorySaveFailure"
 }))
 {
-    
-        <h2>Create New Category</h2>
+    <div class="form-horizontal">
+        <h2 class="text-info">Create New Category</h2>
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -30,9 +30,8 @@
                 <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
-        <br />
-        <br />
-    
+       
+    </div>
 
 }
 

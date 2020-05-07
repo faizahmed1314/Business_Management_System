@@ -7,42 +7,80 @@
 <br />
 <br />
 <div style="font-family: Arial">
-    <h2>Category Index</h2>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="text-info">Category Index Page</h2>
+        </div>
+        <div class="col-lg-6">
+            <h2>
+                @Html.ActionLink("Create New", "Create")
+            </h2>
+        </div>
+    </div>
+    <br />
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+
+
     <table class="table table-bordered">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Code)
-            </th>
-            <th>Action</th>
-        </tr>
-
+        <thead>
+            <tr style="background-color: teal; color: white; font-weight: bold">
+                <th>
+                    Serial No
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Code)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        @{var sl = 0; }
         @foreach (var item in Model)
         {
             using (Html.BeginForm("Delete", "Category", new { id = item.Id }))
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+    <tbody>
+        <tr>
+            <td>
+                @(++sl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
-                        <input type="submit" value="Delete" onclick="return confirm('Are you sure to delete record with Id=@item.Id and Name=@item.Name');" />
+                <input type="submit" class="btn btn-warning" value="Delete" onclick="return confirm('Are you sure to delete record with Id=@item.Id and Name=@item.Name');" />
 
-                    </td>
-                </tr>
+            </td>
+        </tr>
+    </tbody>
             }
         }
 
     </table>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var save = '@TempData["save"]';
+            var edit = '@TempData["Edit"]';
+            var remove = '@TempData["delete"]';
+
+
+            if (save != '') {
+                alertify.success(save);
+            } else if (edit != '') {
+                alertify.success(edit);
+            } else if (remove != '') {
+                alertify.error(remove);
+            }
+
+        });
+    </script>
+}

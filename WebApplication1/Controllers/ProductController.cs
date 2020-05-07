@@ -41,6 +41,7 @@ namespace WebApplication1.Controllers
                 product.FileName = product.UploadFile.FileName;
 
                 _productManager.Save(product);
+                TempData["save"] = "Successfully Saved";
                 return RedirectToAction("Index");
             }
             return View();
@@ -63,6 +64,7 @@ namespace WebApplication1.Controllers
                 product.FileName = product.UploadFile.FileName;
 
                 _productManager.Update(product);
+                TempData["Edit"] = "Product updated successfully";
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -75,6 +77,7 @@ namespace WebApplication1.Controllers
             {
                 Product product = _productManager.GetProductById(id);
                 _productManager.Delete(product);
+                TempData["delete"] = "Product deleted!";
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");

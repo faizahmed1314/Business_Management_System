@@ -37,6 +37,7 @@ namespace WebApplication1.Controllers
                 supplier.FileName = supplier.UploadFile.FileName;
 
                 _supplierManager.Save(supplier);
+                TempData["save"] = "Successfully Saved";
                 return RedirectToAction("Index");
             }
             return View();
@@ -60,6 +61,7 @@ namespace WebApplication1.Controllers
                 supplier.FileName = supplier.UploadFile.FileName;
 
                 _supplierManager.Update(supplier);
+                TempData["Edit"] = "Supplier updated successfully";
                 return RedirectToAction("Index");
             }
 
@@ -72,6 +74,7 @@ namespace WebApplication1.Controllers
 
             Supplier supplier = _supplierManager.GetSupplierById(id);
             _supplierManager.Delete(supplier);
+            TempData["delete"] = "Supplier deleted!";
             return RedirectToAction("Index");
         }
 

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -48,26 +49,26 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        
+
     </div>
     <div class="text-right">
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-    
 
    
-   
+
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="~/Scripts/Product/createProduct.js"></script>
+    <script src="~/Scripts/Product/createProduct.js"></script>
 
-    <script src="~/Scripts/Product/createProduct.js"></script>
-    <script src="~/Scripts/Product/createProduct.js"></script>
-    
-    @RenderSection("scripts",required:false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>

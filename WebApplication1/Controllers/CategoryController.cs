@@ -41,6 +41,7 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 bool isSaved=_categoryManager.Save(category);
+                TempData["save"] = "Successfully Saved";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -57,17 +58,14 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CategoryCreateVm entity)
+        public ActionResult Edit(Category category)
         {
-            var category = new Category()
-            {
-                Name = entity.Name,
-                Code = entity.Code
-            };
+            
 
             if (ModelState.IsValid)
             {
                 _categoryManager.UpdateCategory(category);
+                TempData["Edit"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -76,11 +74,17 @@ namespace WebApplication1.Controllers
        [HttpPost]
         public ActionResult Delete(int id)
         {
-           
-             _categoryManager.DeleteCategory(id);             
-             return RedirectToAction("Index");
+            
+             var isDeleted=_categoryManager.DeleteCategory(id);
+            if (isDeleted)
+            {
+                TempData["delete"] = "Category deleted!";
+                return RedirectToAction("Index");
+            }
+                return RedirectToAction("Index");
+
         }
-        
-       
-	}
+
+
+    }
 }

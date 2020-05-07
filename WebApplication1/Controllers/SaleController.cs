@@ -54,7 +54,7 @@ namespace WebApplication1.Controllers
         {
 
             var dataList = _saleManager.GetByProductId(id);
-            var jsonData = dataList.Select(c => new {c.Quantity });
+            var jsonData = dataList.Select(c => new {c.Quantity,c.MRP });
             return Json(jsonData, JsonRequestBehavior.AllowGet);
 
         }

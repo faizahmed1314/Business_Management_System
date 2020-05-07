@@ -3,9 +3,9 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Update Supplier</h2>
+<h3>Update Supplier</h3>
 
-
+<br />
 <div>
     <form method="POST" class="form-horizontal" enctype="multipart/form-data">
         @Html.HiddenFor(s => s.Id)
@@ -63,7 +63,9 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <h3>
+        @Html.ActionLink("Back to List", "Index")
+    </h3>
 </div>
 
 

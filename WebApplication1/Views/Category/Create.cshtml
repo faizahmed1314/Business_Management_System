@@ -15,29 +15,30 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Category</h4>
+            
+            <h2 class="text-info">Create Category</h2>
             <hr />
             @Html.ValidationSummary(true)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name)
-                    @Html.ValidationMessageFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Code)
-                    @Html.ValidationMessageFor(model => model.Code)
+                    @Html.EditorFor(model => model.Code, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-success" />
                 </div>
             </div>
         </div>
@@ -51,3 +52,4 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
