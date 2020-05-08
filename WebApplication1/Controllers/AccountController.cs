@@ -41,6 +41,7 @@ namespace WebApplication1.Controllers
                 var save = _accountManager.Save(user);
                 if (save)
                 {
+                    TempData["save"] = "Registration successful";
                     return RedirectToAction("Index", "Account");
                 }
             }
@@ -56,14 +57,14 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserAccount user)
+        public ActionResult Login(RegisteredUser user)
         {
             
                 var obj =_accountManager.IsLogin(user);
                 if (obj != null)
                 {
-                    Session["UserId"] = user.Id.ToString();
-                    Session["UserName"] = user.UserName.ToString();
+                    Session["UserId"] = obj.Id.ToString();
+                    Session["UserName"] = obj.UserName.ToString();
                     return RedirectToAction("Index", "Account");
                 }
                 else
@@ -80,6 +81,16 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Register", "Account");
         }
 
-        
-	}
+        public JsonResult IsUserNameExist(string username)
+        {
+            var data = _accountManager.IsUserNameExist(username);
+            if (data != null)
+            {
+                return Json("Sorry! This user name  already taken.");
+            }
+            return Json(false);
+        }
+
+
+    }
 }

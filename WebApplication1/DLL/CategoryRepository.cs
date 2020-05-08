@@ -46,6 +46,12 @@ namespace WebApplication1.DLL
             return false;
         }
 
+        public Category IsCodeNoExist(string code)
+        {
+            var category = _db.Categories.Where(c => c.Code == code).FirstOrDefault();
+            return category;
+        }
+
         public bool DeleteCategory(int id)
         {
             var category = _db.Categories.Where(x => x.Id == id).FirstOrDefault();

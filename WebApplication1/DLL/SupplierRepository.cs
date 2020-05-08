@@ -44,6 +44,12 @@ namespace WebApplication1.DLL
             return false;
         }
 
+        public Supplier IsCodeNoExist(string code)
+        {
+            var  supplier= _db.Suppliers.Where(c => c.Code == code).FirstOrDefault();
+            return supplier;
+        }
+
         public bool Delete(Supplier supplier)
         {
 

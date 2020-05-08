@@ -35,5 +35,10 @@ namespace WebApplication1.BAL
         {
             return _categoryRepository.DeleteCategory(id);
         }
+
+        public Category IsCodeNoExist(string code)
+        {
+            return _categoryRepository.IsCodeNoExist(code);
+        }
     }
 }

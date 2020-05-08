@@ -31,16 +31,24 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileByte = new byte[supplier.UploadFile.ContentLength];
-                supplier.UploadFile.InputStream.Read(fileByte, 0, supplier.UploadFile.ContentLength);
-                supplier.File = fileByte;
-                supplier.FileName = supplier.UploadFile.FileName;
+                if (supplier.UploadFile != null)
+                {
+                    var fileByte = new byte[supplier.UploadFile.ContentLength];
+                    supplier.UploadFile.InputStream.Read(fileByte, 0, supplier.UploadFile.ContentLength);
+                    supplier.File = fileByte;
+                    supplier.FileName = supplier.UploadFile.FileName;
 
-                _supplierManager.Save(supplier);
-                TempData["save"] = "Successfully Saved";
-                return RedirectToAction("Index");
+                    var isSaved = _supplierManager.Save(supplier);
+                    if (isSaved)
+                    {
+                        TempData["save"] = "Supplier created successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
+                
+                
             }
-            return View();
+            return View(supplier);
         }
         public ActionResult Edit(int id)
         {
@@ -55,14 +63,21 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
-                var fileByte = new byte[supplier.UploadFile.ContentLength];
-                supplier.UploadFile.InputStream.Read(fileByte, 0, supplier.UploadFile.ContentLength);
-                supplier.File = fileByte;
-                supplier.FileName = supplier.UploadFile.FileName;
+                if (supplier.UploadFile != null)
+                {
+                    var fileByte = new byte[supplier.UploadFile.ContentLength];
+                    supplier.UploadFile.InputStream.Read(fileByte, 0, supplier.UploadFile.ContentLength);
+                    supplier.File = fileByte;
+                    supplier.FileName = supplier.UploadFile.FileName;
 
-                _supplierManager.Update(supplier);
-                TempData["Edit"] = "Supplier updated successfully";
-                return RedirectToAction("Index");
+                    var isUpdated = _supplierManager.Update(supplier);
+                    if (isUpdated)
+                    {
+                        TempData["Edit"] = "Supplier updated successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
+                
             }
 
             return View(supplier);
@@ -73,11 +88,26 @@ namespace WebApplication1.Controllers
         {
 
             Supplier supplier = _supplierManager.GetSupplierById(id);
-            _supplierManager.Delete(supplier);
-            TempData["delete"] = "Supplier deleted!";
-            return RedirectToAction("Index");
+            var isDeleted=_supplierManager.Delete(supplier);
+            if (isDeleted)
+            {
+                TempData["delete"] = "Supplier deleted!";
+                return RedirectToAction("Index");
+            }
+                return RedirectToAction("Index");
+
         }
 
-        
-	}
+        public JsonResult IsCodeNoExist(string code)
+        {
+            var data = _supplierManager.IsCodeNoExist(code);
+            if (data != null)
+            {
+                return Json("Sorry! This code no is exist.");
+            }
+            return Json(false);
+        }
+
+
+    }
 }

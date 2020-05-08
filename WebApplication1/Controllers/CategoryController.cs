@@ -40,9 +40,13 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
-                bool isSaved=_categoryManager.Save(category);
-                TempData["save"] = "Successfully Saved";
-                return RedirectToAction("Index");
+                var isSaved=_categoryManager.Save(category);
+                if (isSaved)
+                {
+                    TempData["save"] = "Category created successfully";
+                    return RedirectToAction("Index");
+                }
+                
             }
             return View(category);
         }
@@ -52,7 +56,6 @@ namespace WebApplication1.Controllers
         {
 
             var category = _categoryManager.GetCategoryById(id);
-
             return View(category);
         }
 
@@ -64,9 +67,13 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
-                _categoryManager.UpdateCategory(category);
-                TempData["Edit"] = "Category updated successfully";
-                return RedirectToAction("Index");
+                var isUpdated=_categoryManager.UpdateCategory(category);
+                if (isUpdated)
+                {
+                    TempData["Edit"] = "Category updated successfully";
+                    return RedirectToAction("Index");
+                }
+                
             }
             return View(category);
         }
@@ -83,6 +90,15 @@ namespace WebApplication1.Controllers
             }
                 return RedirectToAction("Index");
 
+        }
+        public JsonResult IsCodeNoExist(string code)
+        {
+            var data = _categoryManager.IsCodeNoExist(code);
+            if (data != null)
+            {
+                return Json("Sorry! This code no is exist.");
+            }
+            return Json(false);
         }
 
 

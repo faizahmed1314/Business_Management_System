@@ -27,22 +27,25 @@ namespace WebApplication1.Controllers
         
         {
             var model = new Purchase();
-            model.ProductLookUp = GetProductSelectListItems();
-            model.SupplierLookUp = GetSupplierSelectListItems();
+            model.ProductLookUp = _purchaseManager.GetProductSelectListItems();
+            model.SupplierLookUp = _purchaseManager.GetSupplierSelectListItems();
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Create(Purchase purchase)
         {
-            purchase.ProductLookUp = GetProductSelectListItems();
-            purchase.SupplierLookUp = GetSupplierSelectListItems();
+            purchase.ProductLookUp = _purchaseManager.GetProductSelectListItems();
+            purchase.SupplierLookUp = _purchaseManager.GetSupplierSelectListItems();
 
             if (ModelState.IsValid && purchase.PurchaseDetailses != null && purchase.PurchaseDetailses.Count > 0)
             {
                var isSaved= _purchaseManager.Save(purchase);
                 if (isSaved)
+                {
                     return View(purchase);
+
+                }
                 //return RedirectToAction("Index");
             }
             return View(purchase);
@@ -58,54 +61,7 @@ namespace WebApplication1.Controllers
             return Json(false);
         }
 
-        public List<SelectListItem> GetSupplierSelectListItems()
-        {
-            var dataList = _purchaseManager.GetAllSupplier();
-            var supplierSelectListItems = new List<SelectListItem>();
-            supplierSelectListItems.AddRange(GetDefaultSelectListItem());
-            if (dataList != null && dataList.Count>0)
-            {
-                foreach (var supplier in dataList)
-                {
-                    var selectListItem = new SelectListItem();
-                    selectListItem.Text = supplier.Name;
-                    selectListItem.Value = supplier.Id.ToString();
-                    supplierSelectListItems.Add(selectListItem);
-                }
-            }
-            return supplierSelectListItems;
-        } 
-        public List<SelectListItem> GetDefaultSelectListItem()
-        {
-            var dataList = new List<SelectListItem>();
-            var defaultSelectListItem = new SelectListItem();
-            defaultSelectListItem.Text = "---Select---";
-            defaultSelectListItem.Value = "";
-            dataList.Add(defaultSelectListItem);
-            return dataList;
-        }
-
-        public List<SelectListItem> GetProductSelectListItems()
-        {
-            var dataList = _purchaseManager.GetAllProduct();
-            var productSelectListItems = new List<SelectListItem>();
-            productSelectListItems.AddRange(GetDefaultSelectListItem());
-
-            if (dataList != null && dataList.Count > 0)
-            {
-                
-                foreach (var product in dataList)
-                {
-                    var selectListItem = new SelectListItem();
-
-                    selectListItem.Text = product.Name;
-                    selectListItem.Value = product.Id.ToString();
-
-                    productSelectListItems.Add(selectListItem);
-                }
-            }
-            return productSelectListItems;
-        }
+        
 
         public JsonResult GetByProductId(int id)
         {

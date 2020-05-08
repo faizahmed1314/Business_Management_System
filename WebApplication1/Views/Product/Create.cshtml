@@ -1,4 +1,4 @@
-﻿@model List<WebApplication1.Models.Product>
+﻿@model WebApplication1.Models.Product
 
 @{
     ViewBag.Title = "Create";
@@ -10,31 +10,31 @@
 
 <div>
     <h2 class="text-info">
-        Update Product
+        Create Product
     </h2>
 </div>
 <div>
-    <form method="POST" class="form-horizontal" enctype="multipart/form-data">
+    <form method="POST" id="ProductCreate" class="form-horizontal" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Code</label>
                     <div class="col-sm-10">
-                        <input name="Code" type="text" class="form-control" placeholder="Code">
+                        <input name="Code" type="text" class="form-control" placeholder="Code" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                        <input name="Name" type="text" class="form-control" placeholder="Name">
+                        <input name="Name" type="text" class="form-control" placeholder="Name" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Category</label>
                     <div class="col-sm-8">
 
-                        <select name="CategoryId" class="form-control" id="CategoryId"></select>
+                        <select name="CategoryId" class="form-control" id="CategoryId" autofocus></select>
                         @*@Html.DropDownListFor(c => c.CategoryId, Model.CategoryLookUp, new {@class = "form-control"})*@
                         @*<select name="CategoryId" class="form-control">
                                 <option>Select Option</option>
@@ -45,24 +45,24 @@
                     </div>
                     <div class="col-sm-2  category-add-icon" style="font-size: 20px">
 
-                        <button id="CategoryIcon">Add</button>
+                        <button id="CategoryIcon" class="btn btn-info">Add</button>
 
                         @*<button class="btn btn-warning " data-toggle="modal" data-target="#myModal">
-                            Add
-                        </button>*@
+                                Add
+                            </button>*@
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Reorder Level</label>
                     <div class="col-sm-10">
-                        <input name="ReOrderLevel" type="number" class="form-control" placeholder="Reorder Level">
+                        <input name="ReOrderLevel" type="number" class="form-control" placeholder="Reorder Level" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                        <textarea name="Description" class="form-control"></textarea>
+                        <textarea name="Description" class="form-control" placeholder="Description"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -157,6 +157,46 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ProductCreate").validate({
+            rules: {
+                Code: {
+                    required: true,
+                    minlength: 3
+
+                },
+                Name: {
+                    required: true,
+
+                },
+                ReOrderLevel: {
+                    required: true,
+
+                },
+                UploadFile: {
+                    required: true,
+                   
+                },
+               
+
+            },
+            messages: {
+                Name: "Please enter your product name!",
+                
+                Code: {
+                    required: "Please enter your product code",
+                    minlength: "Code should be at least 3 characters"
+                },
+                ReOrderLevel: "Please enter your product re-order level!",
+                UploadFile: "Please enter your product image!",
+                
+                
+
+            }
+        });
+    });
+</script>
 
 
 

@@ -116,9 +116,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Product\createProduct.js" />
+    <Content Include="Scripts\ProjectScripts\Account\AccountRegistration.js" />
     <Content Include="Scripts\ProjectScripts\Customer\CustomerCreate.js" />
     <Content Include="Scripts\ProjectScripts\Purchase\PurchaseCreate.js" />
     <Content Include="Scripts\ProjectScripts\Sale\SaleCreate.js" />
+    <Content Include="Scripts\ProjectScripts\Supplier\SupplierCreate.js" />
+    <Content Include="Scripts\ProjectScripts\Supplier\SupplierEdit.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -191,6 +194,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\PurchaseDetails.cs" />
+    <Compile Include="Models\RegisteredUser.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\SaleDetails.cs" />
     <Compile Include="Models\Supplier.cs" />

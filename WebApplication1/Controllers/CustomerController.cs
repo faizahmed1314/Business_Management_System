@@ -27,64 +27,28 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        //public ActionResult Create(Customer customer)
-        //{
-        //    try
-        //    {
-        //        if (customer.UploadFile != null)
-        //        {
-        //            var fileByte = new byte[customer.UploadFile.ContentLength];
-        //            customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
-        //            customer.File = fileByte;
-        //            customer.FileName = customer.UploadFile.FileName;
-
-
-
-        //            _db.Customers.Add(customer);
-        //            int save = _db.SaveChanges();
-        //            if (save > 0)
-        //            {
-        //                ViewBag.isSuccess = "Saved";
-        //                //return View("Index");
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Fail = "Not Saved";
-        //            }
-        //            var dataList = _db.Customers.ToList();
-        //            if (dataList != null)
-        //            {
-        //                return View(dataList);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-
-        //        ViewBag.Fail = exception.Message;
-        //    }
-        //    return View();
-        //}
-
         [HttpPost]
-
         public ActionResult Create(Customer customer)
         {
 
             if (ModelState.IsValid)
             {
-                var fileByte = new byte[customer.UploadFile.ContentLength];
-                customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
-                customer.File = fileByte;
-                customer.FileName = customer.UploadFile.FileName;
+                if (customer.UploadFile != null)
+                {
+                    var fileByte = new byte[customer.UploadFile.ContentLength];
+                    customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
+                    customer.File = fileByte;
+                    customer.FileName = customer.UploadFile.FileName;
 
-                _customerManager.Save(customer);
-                TempData["save"] = "Successfully Saved";
-                return RedirectToAction("Index");
-
-
+                    var isSaved = _customerManager.Save(customer);
+                    if (isSaved)
+                    {
+                        TempData["save"] = "Customer created successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
             }
-            return View("Create");
+            return View(customer);
         }
 
         public ActionResult Edit(int id)
@@ -100,14 +64,21 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
-                var fileByte = new byte[customer.UploadFile.ContentLength];
-                customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
-                customer.File = fileByte;
-                customer.FileName = customer.UploadFile.FileName;
+                if (customer.UploadFile != null)
+                {
+                    var fileByte = new byte[customer.UploadFile.ContentLength];
+                    customer.UploadFile.InputStream.Read(fileByte, 0, customer.UploadFile.ContentLength);
+                    customer.File = fileByte;
+                    customer.FileName = customer.UploadFile.FileName;
 
-                _customerManager.Update(customer);
-                TempData["Edit"] = "Category updated successfully";
-                return RedirectToAction("Index");
+                    var isUpdated = _customerManager.Update(customer);
+                    if (isUpdated)
+                    {
+                        TempData["Edit"] = "Category updated successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
+
             }
 
             return View(customer);
@@ -119,12 +90,25 @@ namespace WebApplication1.Controllers
             if (id != null)
             {
                 Customer customer = _customerManager.GetCustomerById(id);
-                _customerManager.Delete(customer);
-                TempData["delete"] = "Customer deleted!";
-                return RedirectToAction("Index");
-            }
+                var isDeleted = _customerManager.Delete(customer);
+                if (isDeleted)
+                {
+                    TempData["delete"] = "Customer deleted!";
+                    return RedirectToAction("Index");
+                }
 
+            }
             return RedirectToAction("Index");
+        }
+
+        public JsonResult IsCodeNoExist(string code)
+        {
+            var data = _customerManager.IsCodeNoExist(code);
+            if (data != null)
+            {
+                return Json("Sorry! This code no is exist.");
+            }
+            return Json(false);
         }
     }
 }

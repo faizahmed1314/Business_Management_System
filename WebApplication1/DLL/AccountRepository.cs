@@ -27,14 +27,16 @@ namespace WebApplication1.DLL
             return false;
         }
 
-        public bool IsLogin(UserAccount user)
+        public UserAccount IsLogin(RegisteredUser user)
         {
             var obj = _db.UserAccounts.Where(u => u.UserName == user.UserName && u.Password == user.Password).FirstOrDefault();
-            if (obj != null)
-            {
-                return true;
-            }
-            return false;
+            return obj;
+        }
+
+        public UserAccount IsUserNameExist(string username)
+        {
+            var user = _db.UserAccounts.Where(c => c.UserName == username).FirstOrDefault();
+            return user;
         }
     }
 }

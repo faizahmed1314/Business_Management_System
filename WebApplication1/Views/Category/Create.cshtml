@@ -14,38 +14,47 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            
-            <h2 class="text-info">Create Category</h2>
-            <hr />
-            @Html.ValidationSummary(true)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
-                </div>
+        <div class="form-horizontal row">
+            <div class="col-md-12">
+                <h2 class="text-info">Create Category</h2>
+                <hr />
             </div>
+            <div class="col-md-6">
+                @Html.ValidationSummary(true)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Code, null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
-                </div>
-            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control", placeholder = "name" })
+                        @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Code, null, new { @class = "form-control", placeholder = "code" })
+                        @Html.ValidationMessageFor(model => model.Code, null, new { @class = "text-danger" })
+                        <span id="CodeSpan" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <span id="ButtonSpan"></span>
+                    </div>
+
+                </div>
+            </div>            
         </div>
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        <h3>
+            @Html.ActionLink("Back to List", "Index")
+        </h3>
     </div>
 </div>
 
@@ -53,3 +62,32 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+<script type="text/javascript">
+
+    $("#Code").keyup(function () {
+
+        var codeValue = $(this).val();
+        if (codeValue != undefined && codeValue != "") {
+
+            //-------------Key---Value
+            var params = { code: codeValue };
+            $.ajax({
+                type: "POST",
+                url: "../Category/IsCodeNoExist",
+                contentType: "application/Json; charset=utf-8",
+                data: JSON.stringify(params),
+                success: function (rData) {
+                    if (rData !== false && rData != undefined) {
+                        $("#CodeSpan").text(rData);
+                        var btn = "<input type='button' value='Close' class='btn btn-danger'>";
+
+                        $("#ButtonSpan").html(btn);
+                    } else {
+                        $("#CodeSpan").text("");
+                        $("#ButtonSpan").html("");
+                    }
+                }
+            });
+        }
+    });
+</script>

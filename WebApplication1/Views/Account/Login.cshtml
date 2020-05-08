@@ -1,56 +1,60 @@
-﻿@model WebApplication1.Models.UserAccount
+﻿@model WebApplication1.Models.RegisteredUser
 
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<h3>Login</h3>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>UserAccount</h4>
+    <div class="form-horizontal row">
+        <h2 class="text-info">Sign In</h2>
         <hr />
-        @Html.ValidationSummary(true)
-
+        <h4>
+            @Html.ValidationSummary(true, "", new { @style = "color: red" })
+        </h4>
        
 
-        
+    <div class="col-md-6">
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName)
+            @Html.LabelFor(model => model.UserName,"User Name", new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.UserName, null, new { @class = "form-control", placeholder = "user name" })
                 @Html.ValidationMessageFor(model => model.UserName)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password)
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "password" })
                 @Html.ValidationMessageFor(model => model.Password)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfirmPassword)
-                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            @Html.LabelFor(model => model.ConfirmPassword,"Confirm Password", new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "confirm password" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+            <div class="col-md-offset-4 col-md-8">
+                <input type="submit" value="Login" class="btn btn-success" />
             </div>
         </div>
+    </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Create new account click here!", "Register","Account")
+    <h4>
+        @Html.ActionLink("Create new account click here!", "Register", "Account")
+    </h4>
 </div>

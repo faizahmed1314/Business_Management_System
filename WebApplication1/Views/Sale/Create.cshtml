@@ -18,19 +18,19 @@
                 <div class="panel-body">
                     <div class="form-group">
                         @Html.LabelFor(c => c.CustomerId, "Customer *", new { @class = "control-label col-sm-2" })
-                        <div class="col-sm-10">
-                            @Html.DropDownListFor(c => c.CustomerId, Model.CustomerLookup, null, new { @class = "form-control" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(c => c.CustomerId, Model.CustomerLookup, null, new { @class = "form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.DateTime, "Date *", new { @class = "control-label col-sm-2" })
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             @Html.TextBoxFor(c => c.DateTime, null, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Loyality Point</label>
-                        <div class="col-sm-10" >
+                        <div class="col-sm-8" >
                             <input type="text" class="form-control" id="loyalityPoint" readonly="readonly">
                         </div>
                     </div>
@@ -48,31 +48,31 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Product</label>
-                        <div class="col-sm-10">
-                            @Html.DropDownList("ItemName", Model.ProductLookup, new { @class = "form-control" })
+                        <div class="col-sm-8">
+                            @Html.DropDownList("ItemName", Model.ProductLookup, new { @class = "form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Available Quantity</label>
-                        <div class="col-sm-10" >
+                        <div class="col-sm-8" >
                             <input type="text" class="form-control" id="avQuantity" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.Label("ItemPrice", "Item Price *", new { @class = "control-label col-sm-2" })
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             @Html.TextBox("ItemPrice", null, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.Label("ItemQty", "Item Quantity *", new { @class = "control-label col-sm-2" })
-                        <div class="col-sm-10">
-                            @Html.TextBox("ItemQty", null, new { @class = "form-control" })
+                        <div class="col-sm-8">
+                            @Html.TextBox("ItemQty", null, new { @class = "form-control", @required = "required" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-8">
                             <button type="button" class="btn btn-info" id="AddButton">Add</button>
 
                         </div>
@@ -129,9 +129,9 @@
 
     <div class="panel-group">
         <div class="panel-body">
-            <div class="col-6">
+            <div class="col-6 ">
                 <div class="form-group">
-                    <label class="col-sm-8 control-label">Grand Total</label>
+                    <label class="col-sm-2 control-label">Grand Total</label>
                     <div class="col-sm-4">
                         <input type="text" name="GrandTotalValue" class="form-control" id="grandTotalValue" value="">
                     </div>
@@ -139,8 +139,8 @@
 
             </div>
 
-            <div class="col-6">
-                <div class="col-sm-10">
+            <div class="col-6 text-right">
+                <div >
                     <input type="submit" class="btn btn-success" value="Save" />
                 </div>
             </div>

@@ -1,4 +1,4 @@
-﻿@model List<WebApplication1.Models.Customer>
+﻿@model WebApplication1.Models.Customer
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,11 +13,11 @@
         <div class="card card-save my-5">
             <div class="card-body">
                 <h3 class="card-title text-center"><strong>Customer Entity</strong></h3>
-                <form method="POST" class="form-save" enctype="multipart/form-data">
+                <form method="POST" class="form-save" id="CustomerCreate" enctype="multipart/form-data">
                     <div class="form-label-group">
                         <label for="inputCode"> Code</label>
                         <input type="text" id="Code" name="Code" class="form-control" placeholder="Customer Code" required autofocus>
-
+                        <span id="CodeSpan" class="text-danger"></span>
                     </div>
                     <div class="form-label-group">
                         <label for="inputName"> Name</label>
@@ -48,16 +48,17 @@
                     <div>
                         <label class="col-sm-2 control-label">Image</label>
                         <div class="col-sm-10">
-                            
+
                             <img src="" class="img-responsive img-thumbnail pch-img" id="cntimage" alt="select image">
-                            
+
                             <input type="file" name="UploadFile" required="required" onchange="readURL(this);">
                         </div>
                     </div>
-                    <div >
+                    <div>
                         <button id="btnSubmit" class="btn btn-info btn-block text-uppercase" type="submit">Save</button>
+
                     </div>
-                    
+
                 </form>
             </div>
 
@@ -71,58 +72,7 @@
         @Html.ActionLink("Back To Index", "Index")
     </h3>
 </div>
-@if (Model != null && Model.Count > 0)
-{
-    <div>
-        @{var sl = 0;}
-        <table class="table table-bordered table-striped table-responsive">
-            <thead>
-                <tr>
-                    <th>Sl</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact Number</th>
-                    <th>Loyalty Point</th>
-                    <th>Image</th>
-                    <th>Action</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in Model)
-                {
-                    <tr>
-                        <td>@(++sl)</td>
-                        <td>@customer.Code</td>
-                        <td>@customer.Name</td>
-                        <td>@customer.Address</td>
-                        <td>@customer.Email</td>
-                        <td>@customer.ContactNumber</td>
-                        <td>@customer.LoyaltyPoint</td>
-
-                        <td>
-                            @{
-                    var file = Convert.ToBase64String(customer.File);
-                    var image = string.Format("data:image/gif; base64," + file + "");
-                            }
-                            <img class="img-responsive img-thumbnail" src="@image" style=" width: 100px; height: 100px;" />
-                        </td>
-
-
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id }, new { @target = "_self" })
-                            @Html.ActionLink("Delete", "Delete", "Customer", new { id = customer.Id }, new { @target = "_self" })
-
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
-    </div>
-}
 
 <script type="text/javascript">
     function readURL(input) {
@@ -137,4 +87,49 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/ProjectScripts/Customer/CustomerCreate.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CustomerCreate").validate({
+            rules: {
+                Code: {
+                    required: true,
+                    minlength: 3
+
+                },
+                Name: {
+                    required: true,
+
+                },
+                Email: {
+                    required: true,
+
+                },
+                ContactNumber: {
+                    required: true,
+                    minlength: 11
+                },
+
+            },
+            messages: {
+                Name: "Please enter your  name!",
+                Email: "The email should be in the format: abc@domain.tld!",
+                Code: {
+                    required: "Please enter your code",
+                    minlength: "Code should be at least 3 characters"
+                },
+                ContactNumber: {
+                    required: "Please enter your contact number",
+
+                    minlength: "Contact number should be at least 11  characters"
+                },
+
+            }
+        });
+    });
 </script>

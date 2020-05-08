@@ -16,21 +16,21 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input name="Date" type="date" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Bill No</label>
-                        <div class="col-sm-10">
-                            <input name="BillNo" type="text" id="BillTextBox" class="form-control" placeholder="Bill No">
+                        <div class="col-sm-8">
+                            <input name="BillNo" type="text" id="BillTextBox" class="form-control" placeholder="Bill No" required>
                             <span id="BillSpan" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Supplier</label>
-                        <div class="col-sm-10">
-                            @Html.DropDownListFor(c => c.SupplierId, Model.SupplierLookUp, new { @class = "form-control" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(c => c.SupplierId, Model.SupplierLookUp, new { @class = "form-control", @required="required" })
                         </div>
                     </div>
                 </div>
@@ -46,67 +46,67 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Product</label>
-                        <div class="col-sm-10">
-                            @Html.DropDownListFor(c => c.ProductId, Model.ProductLookUp, new { @class = "form-control" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(c => c.ProductId, Model.ProductLookUp, new { @class = "form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Code</label>
-                        <div class="col-sm-10" id="code">
+                        <div class="col-sm-8" id="code">
                             <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Manufacture Date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input name="ManufactureDate" id="manufactureDate" type="date" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Expire Date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input name="ExpireDate" id="expireDate" type="date" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Purchased Quantity</label>
-                        <div class="col-sm-10">
-                            <input name="Quantity" type="text" class="form-control" id="quantity">
+                        <div class="col-sm-8">
+                            <input name="Quantity" type="text" class="form-control" id="quantity" required autofocus>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Unit Price</label>
-                        <div class="col-sm-10">
-                            <input name="UnitPrice" type="text" class="form-control" id="unitPrice">
+                        <div class="col-sm-8">
+                            <input name="UnitPrice" type="text" class="form-control" id="unitPrice" required autofocus>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Total Price</label>
-                        <div class="col-sm-10" id="total">
+                        <div class="col-sm-8" id="total">
                             <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Previous Cost Price</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Previous MRP</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">New Cost Price</label>
-                        <div class="col-sm-10" id="newCostPrice">
+                        <div class="col-sm-8" id="newCostPrice">
                             <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">New MRP</label>
-                        <div class="col-sm-10" id="mrp">
+                        <div class="col-sm-8" id="mrp">
                             <input name="MRP" type="text" class="form-control">
                         </div>
                     </div>
@@ -115,7 +115,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-8">
                 @*<button type="submit" class="btn btn-success">Save</button>*@
                 <input type="button" class="btn btn-info" id="AddButton" value="Add" />
             </div>
@@ -153,7 +153,7 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-10">
+            <div class="col-sm-8">
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
             <div id="ButtonDiv"></div>

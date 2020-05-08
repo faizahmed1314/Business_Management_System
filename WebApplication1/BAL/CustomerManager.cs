@@ -35,5 +35,10 @@ namespace WebApplication1.BAL
         {
             return _customerRepository.Delete(customer);
         }
+
+        public Customer IsCodeNoExist(string code)
+        {
+            return _customerRepository.IsCodeNoExist(code);
+        }
     }
 }

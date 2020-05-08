@@ -35,5 +35,10 @@ namespace WebApplication1.BAL
         {
             return _supplierRepository.Delete(supplier);
         }
+
+        public Supplier IsCodeNoExist(string code)
+        {
+            return _supplierRepository.IsCodeNoExist(code);
+        }
     }
 }

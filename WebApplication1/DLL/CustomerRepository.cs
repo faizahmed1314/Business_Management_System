@@ -45,6 +45,12 @@ namespace WebApplication1.DLL
             return false;
         }
 
+        public Customer IsCodeNoExist(string code)
+        {
+            var customer = _db.Customers.Where(c => c.Code == code).FirstOrDefault();
+            return customer;
+        }
+
         public bool Delete(Customer customer)
         {
 

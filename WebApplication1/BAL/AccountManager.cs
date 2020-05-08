@@ -21,9 +21,14 @@ namespace WebApplication1.BAL
             return _accountRepository.Save(user);
         }
 
-        public bool IsLogin(UserAccount user)
+        public UserAccount IsLogin(RegisteredUser user)
         {
             return _accountRepository.IsLogin(user);
+        }
+
+        public UserAccount IsUserNameExist(string username)
+        {
+            return _accountRepository.IsUserNameExist(username);
         }
     }
 }

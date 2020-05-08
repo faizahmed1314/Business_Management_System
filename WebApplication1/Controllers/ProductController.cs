@@ -24,9 +24,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var productData = _productManager.GetAllProducts();
-            
-            return View(productData);
+            return View();
         }
 
         [HttpPost]
@@ -35,16 +33,22 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileByte = new byte[product.UploadFile.ContentLength];
-                product.UploadFile.InputStream.Read(fileByte, 0, product.UploadFile.ContentLength);
-                product.File = fileByte;
-                product.FileName = product.UploadFile.FileName;
+                if (product.UploadFile != null)
+                {
+                    var fileByte = new byte[product.UploadFile.ContentLength];
+                    product.UploadFile.InputStream.Read(fileByte, 0, product.UploadFile.ContentLength);
+                    product.File = fileByte;
+                    product.FileName = product.UploadFile.FileName;
 
-                _productManager.Save(product);
-                TempData["save"] = "Successfully Saved";
-                return RedirectToAction("Index");
+                    var isSaved = _productManager.Save(product);
+                    if (isSaved)
+                    {
+                        TempData["save"] = "Product created successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
             }
-            return View();
+            return View(product);
         }
 
         public ActionResult Edit(int id)
@@ -58,14 +62,20 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileByte = new byte[product.UploadFile.ContentLength];
-                product.UploadFile.InputStream.Read(fileByte,0, product.UploadFile.ContentLength);
-                product.File = fileByte;
-                product.FileName = product.UploadFile.FileName;
+                if (product.UploadFile != null)
+                {
+                    var fileByte = new byte[product.UploadFile.ContentLength];
+                    product.UploadFile.InputStream.Read(fileByte, 0, product.UploadFile.ContentLength);
+                    product.File = fileByte;
+                    product.FileName = product.UploadFile.FileName;
 
-                _productManager.Update(product);
-                TempData["Edit"] = "Product updated successfully";
-                return RedirectToAction("Index");
+                    var isUpdated = _productManager.Update(product);
+                    if (isUpdated)
+                    {
+                        TempData["Edit"] = "Product updated successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
             }
             return View(product);
         }
@@ -76,9 +86,12 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 Product product = _productManager.GetProductById(id);
-                _productManager.Delete(product);
-                TempData["delete"] = "Product deleted!";
-                return RedirectToAction("Index");
+                var isDeleted=_productManager.Delete(product);
+                if (isDeleted)
+                {
+                    TempData["delete"] = "Product deleted!";
+                    return RedirectToAction("Index");
+                }
             }
             return RedirectToAction("Index");
         }
@@ -103,7 +116,5 @@ namespace WebApplication1.Controllers
             var jsonData = dataList.Select(c => new { c.Id, c.Name });
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-      
 	}
 }

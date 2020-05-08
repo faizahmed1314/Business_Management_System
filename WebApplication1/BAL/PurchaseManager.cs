@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebApplication1.DLL;
 using WebApplication1.Models;
 
@@ -40,6 +41,15 @@ namespace WebApplication1.BAL
         public Purchase IsBillNoExist(string bill)
         {
             return _purchaseRepository.IsBillNoExist(bill);
+        }
+
+        public List<SelectListItem> GetSupplierSelectListItems()
+        {
+            return _purchaseRepository.GetSupplierSelectListItems();
+        }
+        public List<SelectListItem> GetProductSelectListItems()
+        {
+            return _purchaseRepository.GetProductSelectListItems();
         }
     }
 }

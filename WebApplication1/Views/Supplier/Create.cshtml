@@ -1,4 +1,4 @@
-﻿@model List<WebApplication1.Models.Supplier>
+﻿@model WebApplication1.Models.Supplier
 @{
     ViewBag.Title = "Create";
 }
@@ -10,13 +10,13 @@
         <div class="card card-save my-5">
             <div class="card-body">
                 <h2 class="card-title text-center"><strong>Supplier Entity</strong></h2>
-                <form method="POST" class="form-save" enctype="multipart/form-data">
+                <form method="POST" id="SupplierCreate" class="form-save" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
 
                     <div class="form-label-group">
                         <label for="inputCode"> Code</label>
                         <input type="text" id="Code" name="Code" class="form-control" placeholder="Supplier Code" required autofocus>
-
+                        <span id="CodeSpan" class="text-danger"></span>
                     </div>
                     <div class="form-label-group">
                         <label for="inputName"> Name</label>
@@ -68,71 +68,11 @@
         @Html.ActionLink("Back To Index", "Index")
     </h3>
 </div>
-@if (Model != null && Model.Count > 0)
-{
-    <div>
-        @{var sl = 0;}
-        <table class="table table-bordered table-striped table-responsive">
-            <thead>
-                <tr>
-                    <th>Sl</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact Number</th>
-                    <th>Loyalty Point</th>
-                    <th>Image</th>
-                    <th>Action</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var supplier in Model)
-                {
-                    <tr>
-                        <td>@(++sl)</td>
-                        <td>@supplier.Code</td>
-                        <td>@supplier.Name</td>
-                        <td>@supplier.Address</td>
-                        <td>@supplier.Email</td>
-                        <td>@supplier.ContactNumber</td>
-                        <td>@supplier.ContactPerson</td>
-
-                        <td>
-                            @{
-                    var file = Convert.ToBase64String(supplier.File);
-                    var image = string.Format("data:image/gif; base64," + file + "");
-                            }
-                            <img class="img-responsive img-thumbnail" src="@image" style=" width: 100px; height: 100px;" />
-                        </td>
 
 
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Customer", new { id = supplier.Id }, new { @target = "_self" })
-                            @Html.ActionLink("Delete", "Delete", "Customer", new { id = supplier.Id }, new { @target = "_self" })
 
-                        </td>
-                    </tr>
-                }
 
-            </tbody>
-        </table>
-    </div>
-}
-
-<script type="text/javascript">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#cntimage')
-                    .attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/ProjectScripts/Supplier/SupplierCreate.js"></script>
