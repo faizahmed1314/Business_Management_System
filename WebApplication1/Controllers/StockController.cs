@@ -20,13 +20,19 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Index(string product, string category)
         {
+
             var allData = _stockManager.GetAllPurchaseDetails();
-            var data = _stockManager.SearchPurchaseDetails(product, category);
-            if (data == null)
+            if (!string.IsNullOrEmpty(product) || !string.IsNullOrEmpty(category))
             {
-                return View(allData);
+                var data = _stockManager.SearchPurchaseDetails(product, category);
+                if (data == null)
+                {
+                    return View(allData);
+                }
+                return View(data);
             }
-            return View(data);
+            return View(allData);
+
         }
 
         
