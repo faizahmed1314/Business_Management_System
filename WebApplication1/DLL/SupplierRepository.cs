@@ -44,6 +44,12 @@ namespace WebApplication1.DLL
             return false;
         }
 
+        internal Supplier IsEmailExist(string email)
+        {
+            var supplier = _db.Suppliers.Where(c => c.Email == email).FirstOrDefault();
+            return supplier;
+        }
+
         public Supplier IsCodeNoExist(string code)
         {
             var  supplier= _db.Suppliers.Where(c => c.Code == code).FirstOrDefault();

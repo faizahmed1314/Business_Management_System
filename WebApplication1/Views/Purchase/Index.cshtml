@@ -5,12 +5,17 @@
 }
 
 <h2>Index</h2>
+<div>
+    <h3 class="text-info">
+        @Html.ActionLink("Create New", "Create")
+    </h3>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-bordered">
-    <tr>
+    <tr style="background-color: goldenrod; color: white; font-weight: bold">
+        <th>
+            Serial No
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Supplier.Code)
         </th>
@@ -20,15 +25,16 @@
         <th>
             @Html.DisplayNameFor(model => model.BillNo)
         </th>
-        <th>
-            Action
-        </th>
-        <th></th>
-    </tr>
 
+       
+    </tr>
+    @{ var sl = 0;}
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @(++sl)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Supplier.Code)
             </td>
@@ -38,11 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BillNo)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            
         </tr>
     }
 

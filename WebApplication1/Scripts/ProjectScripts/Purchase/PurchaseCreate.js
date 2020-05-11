@@ -23,28 +23,44 @@ $(document.body).on("change", "#ProductId", function () {
 
 
 $(document.body).on("change", "#unitPrice", function () {
-    $("#total").empty();
-    var total = ($("#quantity").val()) * ($("#unitPrice").val());
-    var t = "<input id='totalPrice' class='form-control' value='" + total + "' readonly>";
-    $("#total").append(t);
+    var priceValue = $("#unitPrice").val();
+    var quantityValue = $("#quantity").val();
+    if (priceValue != "" && priceValue != undefined) {
+        $("#total").empty();
+        var total = quantityValue * priceValue;
+        var t = "<input id='totalPrice' class='form-control' value='" + total + "' readonly>";
+        $("#total").append(t);
 
-    $("#newCostPrice").empty();
-    var newCostPrice = ($("#unitPrice").val());
-    var n = "<input id='newCostPriceText' class='form-control' value='" + newCostPrice + "'>";
-    $("#newCostPrice").append(n);
+        $("#newCostPrice").empty();
+        var newCostPrice = priceValue;
+        var n = "<input id='newCostPriceText' class='form-control' value='" + newCostPrice + "'>";
+        $("#newCostPrice").append(n);
 
-    $("#mrp").empty();
-    var unitP = parseFloat($("#unitPrice").val());
-    var mrp = unitP + ((unitP * 25) / 100);
-    var m = "<input id='mRP' class='form-control' value='" + mrp + "'>";
-    $("#mrp").append(m);
+        $("#mrp").empty();
+        var unitP = parseFloat(priceValue);
+        var mrp = unitP + ((unitP * 25) / 100);
+        var m = "<input id='mRP' class='form-control' value='" + mrp + "'>";
+        $("#mrp").append(m);
+    }
+    else {
+        $("#priceSpan").text("Please place your price!");
+    }
+   
 });
 
 $(document.body).on("change", "#quantity", function () {
-    $("#total").empty();
-    var total = ($("#quantity").val()) * ($("#unitPrice").val());
-    var t = "<input class='form-control' value='" + total + "' readonly>";
-    $("#total").append(t);
+    var quantityValue = $("#quantity").val();
+    var priceValue = $("#unitPrice").val();
+    if (quantityValue != "" && quantityValue != undefined) {
+        $("#total").empty();
+        var total = quantityValue * priceValue;
+        var t = "<input class='form-control' value='" + total + "' readonly>";
+        $("#total").append(t);
+    }
+    else {
+        $("#quantitySpan").text("Please place your quantity!");
+    }
+   
 });
 
 /*table data show*/
@@ -162,3 +178,4 @@ $("#BillTextBox").keyup(function () {
         });
     }
 });
+

@@ -40,13 +40,19 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid && purchase.PurchaseDetailses != null && purchase.PurchaseDetailses.Count > 0)
             {
+                var checkBill = _purchaseManager.IsBillNoExist(purchase.BillNo);
+                if (checkBill != null)
+                {
+                    ViewBag.Message = "Sorry! This bill no is exist.";
+                    return View(purchase);
+                }
                var isSaved= _purchaseManager.Save(purchase);
                 if (isSaved)
                 {
                     return View(purchase);
 
                 }
-                //return RedirectToAction("Index");
+                
             }
             return View(purchase);
         }

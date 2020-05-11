@@ -37,9 +37,15 @@ namespace WebApplication1.Controllers
                 Name = entity.Name,
                 Code = entity.Code
             };
-
+            
             if (ModelState.IsValid)
             {
+                var checkName = _categoryManager.IsNameNoExist(category.Name);
+                var checkCode = _categoryManager.IsCodeNoExist(category.Code);
+                if (checkName!=null || checkCode!=null)
+                {
+                    return View(entity);
+                }
                 var isSaved=_categoryManager.Save(category);
                 if (isSaved)
                 {
@@ -48,7 +54,7 @@ namespace WebApplication1.Controllers
                 }
                 
             }
-            return View(category);
+            return View(entity);
         }
 
         [HttpGet]
@@ -67,6 +73,14 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
+                var checkName = _categoryManager.IsNameNoExist(category.Name);
+               
+                if (checkName != null)
+                {
+                    ViewBag.Message = "Sorry! This name is already exist";
+                    return View(category);
+                    
+                }
                 var isUpdated=_categoryManager.UpdateCategory(category);
                 if (isUpdated)
                 {
@@ -97,6 +111,15 @@ namespace WebApplication1.Controllers
             if (data != null)
             {
                 return Json("Sorry! This code no is exist.");
+            }
+            return Json(false);
+        }
+        public JsonResult IsNameNoExist(string name)
+        {
+            var data = _categoryManager.IsNameNoExist(name);
+            if (data != null)
+            {
+                return Json("Sorry! This name is already exist.");
             }
             return Json(false);
         }

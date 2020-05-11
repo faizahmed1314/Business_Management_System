@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal row">
         <div class="col-md-12">
             <h2 class="text-info">Update Category</h2>
@@ -25,6 +25,7 @@
                 <div class="col-md-8">
                     @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+                    <span id="NameSpan" class="text-danger">@ViewBag.Message</span>
                 </div>
             </div>
 
@@ -42,8 +43,8 @@
                 </div>
             </div>
         </div>
-        
-       
+
+
     </div>
 }
 
@@ -53,6 +54,5 @@
     </h3>
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

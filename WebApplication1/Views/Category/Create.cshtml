@@ -27,6 +27,7 @@
                     <div class="col-md-8">
                         @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control", placeholder = "name" })
                         @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+                        <span id="NameSpan" class="text-danger"></span>
 
                     </div>
                 </div>
@@ -47,7 +48,7 @@
                     </div>
 
                 </div>
-            </div>            
+            </div>
         </div>
     }
 
@@ -58,36 +59,7 @@
     </div>
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section scripts{
+    <script src="~/Scripts/ProjectScripts/Category/textBoxValidation.js"></script>
 
-<script type="text/javascript">
-
-    $("#Code").keyup(function () {
-
-        var codeValue = $(this).val();
-        if (codeValue != undefined && codeValue != "") {
-
-            //-------------Key---Value
-            var params = { code: codeValue };
-            $.ajax({
-                type: "POST",
-                url: "../Category/IsCodeNoExist",
-                contentType: "application/Json; charset=utf-8",
-                data: JSON.stringify(params),
-                success: function (rData) {
-                    if (rData !== false && rData != undefined) {
-                        $("#CodeSpan").text(rData);
-                        var btn = "<input type='button' value='Close' class='btn btn-danger'>";
-
-                        $("#ButtonSpan").html(btn);
-                    } else {
-                        $("#CodeSpan").text("");
-                        $("#ButtonSpan").html("");
-                    }
-                }
-            });
-        }
-    });
-</script>
+}

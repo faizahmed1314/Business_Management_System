@@ -33,6 +33,12 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
+                var checkEmail = _customerManager.IsEmailNoExist(customer.Email);
+                var checkCode = _customerManager.IsCodeNoExist(customer.Code);
+                if (checkEmail != null || checkCode != null)
+                {
+                    return View(customer);
+                }
                 if (customer.UploadFile != null)
                 {
                     var fileByte = new byte[customer.UploadFile.ContentLength];
@@ -64,6 +70,7 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 if (customer.UploadFile != null)
                 {
                     var fileByte = new byte[customer.UploadFile.ContentLength];
@@ -107,6 +114,15 @@ namespace WebApplication1.Controllers
             if (data != null)
             {
                 return Json("Sorry! This code no is exist.");
+            }
+            return Json(false);
+        }
+        public JsonResult IsEmailNoExist(string email)
+        {
+            var data = _customerManager.IsEmailNoExist(email);
+            if (data != null)
+            {
+                return Json("Sorry! This email is already exist.");
             }
             return Json(false);
         }

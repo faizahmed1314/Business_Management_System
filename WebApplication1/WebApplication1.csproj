@@ -115,9 +115,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Product\createProduct.js" />
+    <Content Include="Scripts\ProjectScripts\Category\textBoxValidation.js" />
+    <Content Include="Scripts\ProjectScripts\Customer\CustomerEdit.js" />
+    <Content Include="Scripts\ProjectScripts\Product\createProduct.js" />
     <Content Include="Scripts\ProjectScripts\Account\AccountRegistration.js" />
     <Content Include="Scripts\ProjectScripts\Customer\CustomerCreate.js" />
+    <Content Include="Scripts\ProjectScripts\Product\editProduct.js" />
     <Content Include="Scripts\ProjectScripts\Purchase\PurchaseCreate.js" />
     <Content Include="Scripts\ProjectScripts\Sale\SaleCreate.js" />
     <Content Include="Scripts\ProjectScripts\Supplier\SupplierCreate.js" />
@@ -141,6 +144,7 @@
     <Compile Include="BAL\ProductManager.cs" />
     <Compile Include="BAL\PurchaseManager.cs" />
     <Compile Include="BAL\SaleManager.cs" />
+    <Compile Include="BAL\StockManager.cs" />
     <Compile Include="BAL\SupplierManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -148,6 +152,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="DatabaseContext\BmsContext.cs" />
     <Compile Include="DLL\AccountRepository.cs" />
@@ -156,6 +161,7 @@
     <Compile Include="DLL\ProductRepository.cs" />
     <Compile Include="DLL\PurchaseRepository.cs" />
     <Compile Include="DLL\SaleRepository.cs" />
+    <Compile Include="DLL\StockRepository.cs" />
     <Compile Include="DLL\SupplierRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -222,6 +228,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Home.cshtml" />
+    <Content Include="Views\Stock\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

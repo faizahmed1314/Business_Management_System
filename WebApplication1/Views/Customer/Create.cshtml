@@ -32,6 +32,7 @@
                     <div class="form-label-group">
                         <label for="inputEmail"> Email</label>
                         <input type="text" id="Email" name="Email" class="form-control" placeholder="Customer Email" required autofocus>
+                        <span id="EmailSpan" class="text-danger"></span>
 
                     </div>
                     <div class="form-label-group">
@@ -74,62 +75,12 @@
 </div>
 
 
-<script type="text/javascript">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#cntimage')
-                    .attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/ProjectScripts/Customer/CustomerCreate.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#CustomerCreate").validate({
-            rules: {
-                Code: {
-                    required: true,
-                    minlength: 3
 
-                },
-                Name: {
-                    required: true,
 
-                },
-                Email: {
-                    required: true,
 
-                },
-                ContactNumber: {
-                    required: true,
-                    minlength: 11
-                },
-
-            },
-            messages: {
-                Name: "Please enter your  name!",
-                Email: "The email should be in the format: abc@domain.tld!",
-                Code: {
-                    required: "Please enter your code",
-                    minlength: "Code should be at least 3 characters"
-                },
-                ContactNumber: {
-                    required: "Please enter your contact number",
-
-                    minlength: "Contact number should be at least 11  characters"
-                },
-
-            }
-        });
-    });
-</script>

@@ -20,7 +20,7 @@ $("#Code").keyup(function () {
         var params = { code: codeValue };
         $.ajax({
             type: "POST",
-            url: "../Category/IsCodeNoExist",
+            url: "../Supplier/IsCodeNoExist",
             contentType: "application/Json; charset=utf-8",
             data: JSON.stringify(params),
             success: function (rData) {
@@ -30,6 +30,30 @@ $("#Code").keyup(function () {
                 } else {
                     $("#CodeSpan").text("");
                     
+                }
+            }
+        });
+    }
+});
+$("#Email").keyup(function () {
+
+    var emailValue = $(this).val();
+    if (emailValue != undefined && emailValue != "") {
+
+        //-------------Key---Value
+        var params = { email: emailValue };
+        $.ajax({
+            type: "POST",
+            url: "../Supplier/IsEmailExist",
+            contentType: "application/Json; charset=utf-8",
+            data: JSON.stringify(params),
+            success: function (rData) {
+                if (rData !== false && rData != undefined) {
+                    $("#EmailSpan").text(rData);
+
+                } else {
+                    $("#EmailSpan").text("");
+
                 }
             }
         });

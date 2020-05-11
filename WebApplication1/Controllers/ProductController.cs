@@ -35,6 +35,12 @@ namespace WebApplication1.Controllers
             {
                 if (product.UploadFile != null)
                 {
+                    var checkName = _productManager.IsNameExist(product.Name);
+                    var checkCode = _productManager.IsCodeNoExist(product.Code);
+                    if (checkName != null || checkCode != null)
+                    {
+                        return View(product);
+                    }
                     var fileByte = new byte[product.UploadFile.ContentLength];
                     product.UploadFile.InputStream.Read(fileByte, 0, product.UploadFile.ContentLength);
                     product.File = fileByte;
@@ -116,5 +122,23 @@ namespace WebApplication1.Controllers
             var jsonData = dataList.Select(c => new { c.Id, c.Name });
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-	}
+        public JsonResult IsCodeNoExist(string code)
+        {
+            var data = _productManager.IsCodeNoExist(code);
+            if (data != null)
+            {
+                return Json("Sorry! This code no is exist.");
+            }
+            return Json(false);
+        }
+        public JsonResult IsNameExist(string name)
+        {
+            var data = _productManager.IsNameExist(name);
+            if (data != null)
+            {
+                return Json("Sorry! This name is already exist.");
+            }
+            return Json(false);
+        }
+    }
 }

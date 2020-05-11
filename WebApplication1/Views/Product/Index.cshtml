@@ -20,7 +20,7 @@
     @{ var sl = 0;}
     <tr style="background-color: teal; color: white; font-weight: bold">
         <th>
-            Serial No
+            Serial
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -75,7 +75,7 @@
                     <img class="img-responsive img-thumbnail" src="@image" style="width: 100px; height: 100px;" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
+                    @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

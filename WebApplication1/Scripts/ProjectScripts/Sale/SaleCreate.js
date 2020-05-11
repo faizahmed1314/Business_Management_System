@@ -119,8 +119,15 @@ function getSelectedItem() {
 }
 
 function deleteRow(r) {
+
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("table").deleteRow(i);
+
+    var table = document.getElementById("SaleDetailsTable"), sumVal = 0;
+    for (var i = 0; i < table.rows.length; i++) {
+        sumVal = sumVal + parseInt(table.rows[i].cells[5].innerHTML);
+    }
+    document.getElementById("grandTotalValue").value = sumVal;
 }
 
 
@@ -133,6 +140,8 @@ $(document.body).on("click", ".editButton", function () {
 //Find Grand Total
 
 $(document.body).on("click", "#AddButton", function () {
+
+    
 
     var table = document.getElementById("SaleDetailsTable"), sumVal = 0;
     for (var i = 0; i < table.rows.length; i++) {

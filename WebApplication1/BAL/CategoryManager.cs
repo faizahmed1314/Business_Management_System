@@ -40,5 +40,10 @@ namespace WebApplication1.BAL
         {
             return _categoryRepository.IsCodeNoExist(code);
         }
+
+        public Category IsNameNoExist(string name)
+        {
+            return _categoryRepository.IsNameNoExist(name);
+        }
     }
 }

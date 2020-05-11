@@ -57,6 +57,18 @@ namespace WebApplication1.DLL
             return false;
         }
 
+        internal Product IsNameExist(string name)
+        {
+            var product = _db.Products.Where(c => c.Name == name).FirstOrDefault();
+            return product;
+        }
+
+        internal Product IsCodeNoExist(string code)
+        {
+            var product = _db.Products.Where(c => c.Code == code).FirstOrDefault();
+            return product;
+        }
+
         public List<Category> GetAllCategories()
         {
             return _db.Categories.ToList();

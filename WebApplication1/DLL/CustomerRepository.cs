@@ -45,6 +45,12 @@ namespace WebApplication1.DLL
             return false;
         }
 
+        public Customer IsEmailNoExist(string email)
+        {
+            var customer = _db.Customers.Where(c => c.Email == email).FirstOrDefault();
+            return customer;
+        }
+
         public Customer IsCodeNoExist(string code)
         {
             var customer = _db.Customers.Where(c => c.Code == code).FirstOrDefault();

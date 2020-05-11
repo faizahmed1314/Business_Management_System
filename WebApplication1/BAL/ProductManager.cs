@@ -44,5 +44,15 @@ namespace WebApplication1.BAL
         {
             return _productRepository.CreateCategory(category);
         }
+
+        internal Product IsCodeNoExist(string code)
+        {
+            return _productRepository.IsCodeNoExist(code);
+        }
+
+        internal Product IsNameExist(string name)
+        {
+            return _productRepository.IsNameExist(name);
+        }
     }
 }

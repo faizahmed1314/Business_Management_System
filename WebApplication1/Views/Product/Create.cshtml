@@ -4,10 +4,8 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
+<h3>Create</h3>
 <div id="CategoryCreatePvDiv"></div>
-
 <div>
     <h2 class="text-info">
         Create Product
@@ -21,13 +19,15 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Code</label>
                     <div class="col-sm-10">
-                        <input name="Code" type="text" class="form-control" placeholder="Code" autofocus>
+                        <input name="Code" id="Code" type="text" class="form-control" placeholder="Code" autofocus>
+                        <span class="text-danger" id="CodeSpan"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                        <input name="Name" type="text" class="form-control" placeholder="Name" autofocus>
+                        <input name="Name" id="Name" type="text" class="form-control" placeholder="Name" autofocus>
+                        <span class="text-danger" id="NameSpan"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,7 +52,6 @@
                             </button>*@
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Reorder Level</label>
                     <div class="col-sm-10">
@@ -68,30 +67,24 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Image</label>
                     <div class="col-sm-10">
-                        <img src="" class="img-responsive img-thumbnail pch-img" id="cntimage" alt="select image">
+                        <img src="" style="height:100px; width:200px;" class="img-responsive img-thumbnail pch-img" id="cntimage" alt="select image">
                         <input type="file" name="UploadFile" required="required" onchange="readURL(this);">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="text-right">
-                        <button type="submit" class="btn  btn-lg btn-success">Save</button>
+                        <button type="submit" class="btn btn-lg  btn-success">Save</button>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
     </form>
-
-
 </div>
 
 <div>
-    <h3>
+    <h4>
         @Html.ActionLink("Back to List", "Index")
-    </h3>
+    </h4>
 </div>
 
 @*For Modal Add*@
@@ -135,68 +128,14 @@
     </div>
 </form>
 
-
-
-
 @*Script for view Image from your directory*@
-<script type="text/javascript">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#cntimage')
-                    .attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#ProductCreate").validate({
-            rules: {
-                Code: {
-                    required: true,
-                    minlength: 3
+<script src="~/Scripts/ProjectScripts/Product/createProduct.js"></script>
 
-                },
-                Name: {
-                    required: true,
-
-                },
-                ReOrderLevel: {
-                    required: true,
-
-                },
-                UploadFile: {
-                    required: true,
-                   
-                },
-               
-
-            },
-            messages: {
-                Name: "Please enter your product name!",
-                
-                Code: {
-                    required: "Please enter your product code",
-                    minlength: "Code should be at least 3 characters"
-                },
-                ReOrderLevel: "Please enter your product re-order level!",
-                UploadFile: "Please enter your product image!",
-                
-                
-
-            }
-        });
-    });
-</script>
 
 
 

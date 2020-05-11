@@ -40,5 +40,11 @@ namespace WebApplication1.BAL
         {
             return _customerRepository.IsCodeNoExist(code);
         }
+
+        public Customer IsEmailNoExist(string email)
+        {
+            return _customerRepository.IsEmailNoExist(email);
+
+        }
     }
 }
