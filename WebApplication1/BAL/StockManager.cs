@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication1.DLL;
 using WebApplication1.Models;
+using WebApplication1.Models.ViewModels.Stock;
 
 namespace WebApplication1.BAL
 {
@@ -11,14 +12,14 @@ namespace WebApplication1.BAL
     {
         StockRepository _stockRepository = new StockRepository();
 
-        public List<PurchaseDetails> GetAllPurchaseDetails()
+      
+        public List<StockVm> GetAllStockDetails()
         {
-            return _stockRepository.GetAllPurchaseDetails();
+            return _stockRepository.GetAllStockDetails();
         }
-        public List<PurchaseDetails> SearchPurchaseDetails(string product, string category)
+        public List<StockVm> SearchStockDetails(string product, string category)
         {
-            return _stockRepository.SearchPurchaseDetails(product, category);
-
+            return _stockRepository.SearchStockDetails(product, category);
         }
     }
 }

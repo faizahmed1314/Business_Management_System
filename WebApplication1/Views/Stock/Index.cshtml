@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.PurchaseDetails>
+﻿@model IEnumerable<WebApplication1.Models.ViewModels.Stock.StockVm>
 
 @{
     ViewBag.Title = "Index";
@@ -34,26 +34,31 @@
         <thead>
             <tr style="background-color: teal; color: white; font-weight: bold">
                 <th>
-                    @Html.DisplayNameFor(model => model.Product)
+                    @Html.DisplayNameFor(m => m.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Product.Code)
+                    @Html.DisplayNameFor(model => model.Code)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Product.ReOrderLevel)
+                    @Html.DisplayNameFor(model => model.ReOrderLevel)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Product.Category)
+                    @Html.DisplayNameFor(model => model.Category)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Purchase.BillNo)
-                </th>
-
                 <th>
                     @Html.DisplayNameFor(model => model.ExpireDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
+                    @Html.DisplayNameFor(model => model.OpeningBalance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockIn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockOut)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClosingBalance)
                 </th>
 
 
@@ -63,32 +68,37 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.ReOrderLevel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.Category.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Purchase.BillNo)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReOrderLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpireDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpeningBalance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClosingBalance)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ExpireDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
 
-
-                </tr>
+            </tr>
 
             }
         </tbody>

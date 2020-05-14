@@ -194,6 +194,10 @@
     <Compile Include="Migrations\202003211602142_User_Account_Model_Added.designer.cs">
       <DependentUpon>202003211602142_User_Account_Model_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005121620171_QuantityAddedInProductModel.cs" />
+    <Compile Include="Migrations\202005121620171_QuantityAddedInProductModel.designer.cs">
+      <DependentUpon>202005121620171_QuantityAddedInProductModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -207,6 +211,7 @@
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\ViewModels\Category\CategoryCreateVM.cs" />
     <Compile Include="Models\ViewModels\Customer\CustomerEditVm.cs" />
+    <Compile Include="Models\ViewModels\Stock\StockVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\ViewModels\Account\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001311250265_initialize.resx">
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003211602142_User_Account_Model_Added.resx">
       <DependentUpon>202003211602142_User_Account_Model_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005121620171_QuantityAddedInProductModel.resx">
+      <DependentUpon>202005121620171_QuantityAddedInProductModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

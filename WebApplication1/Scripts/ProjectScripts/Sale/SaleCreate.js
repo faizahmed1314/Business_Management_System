@@ -1,10 +1,43 @@
 ﻿var subdirectory = "../../";
 
+$(document).ready(function () {
+    var url = subdirectory + "Sale/GetAllCustomer";
+
+    $.post(url, function (rData) {
+        if (rData != undefined) {
+            $("#CustomerId").empty();
+            $("#CustomerId").append("<option value=''>---Select---</option>");
+            $.each(rData, function (k, v) {
+                var option = "<option value=" + v.Id + ">" + v.Name + "</option>";
+                $("#CustomerId").append(option);
+
+            });
+        }
+    });
+});
+
+$(document).ready(function () {
+    var url = subdirectory + "Sale/GetAllProduct";
+
+    $.post(url, function (rData) {
+        if (rData != undefined) {
+            $("#ItemName").empty();
+            $("#ItemName").append("<option value=''>---Select---</option>");
+            $.each(rData, function (k, v) {
+                var option = "<option value=" + v.Id + ">" + v.Name + "</option>";
+                $("#ItemName").append(option);
+
+            });
+        }
+    });
+});
+
+
 $(document.body).on("change", "#CustomerId", function () {
     var CustomerId = $(this).val();
     if (CustomerId > 0) {
 
-        var url = subdirectory + "Sale/GetByCustomerId";
+        var url = subdirectory + "Sale/GetLoyaltyPointByCustomerId";
         var params = { id: CustomerId };
         $.post(url, params, function (rData) {
             if (rData != undefined) {
@@ -26,21 +59,21 @@ $(document.body).on("change", "#ItemName", function () {
     var ProductId = $(this).val();
     if (ProductId > 0) {
 
-        var url = subdirectory + "Sale/GetByProductId";
+        var url = subdirectory + "Sale/GetQuantityByProductId";
         var params = { id: ProductId };
         $.post(url, params, function (rData) {
             if (rData != undefined) {
                 //$("#avQuantity").empty();
                 //$("#unitPrice").empty();
                 document.getElementById("avQuantity").value = "0";
-                document.getElementById("ItemPrice").value = "";
+                //document.getElementById("ItemPrice").value = "";
 
                 $.each(rData, function (k, v) {
 
                     var avQuantity = v.Quantity; 
                     var mrp = v.MRP;
                     document.getElementById("avQuantity").value = avQuantity;
-                    document.getElementById("ItemPrice").value = v.MRP;
+                    //document.getElementById("ItemPrice").value = v.MRP;
 
                      //var avQuantity = "<input class=form-control value='" + v.Quantity + "' readonly>";
                     //$("#avQuantity").append(avQuantity);
@@ -51,7 +84,7 @@ $(document.body).on("change", "#ItemName", function () {
 
             } else {
                 document.getElementById("avQuantity").value = "";
-                document.getElementById("ItemPrice").value = "";
+                //document.getElementById("ItemPrice").value = "";
 
 
                 //$("#avQuantity").empty();

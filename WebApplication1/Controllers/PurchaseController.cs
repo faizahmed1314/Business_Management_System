@@ -40,6 +40,7 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid && purchase.PurchaseDetailses != null && purchase.PurchaseDetailses.Count > 0)
             {
+                
                 var checkBill = _purchaseManager.IsBillNoExist(purchase.BillNo);
                 if (checkBill != null)
                 {
@@ -77,5 +78,11 @@ namespace WebApplication1.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
 
         }
-	}
+
+        public string GetBillNo()
+        {
+            int rowCount = _purchaseManager.GetAllPurchases().Count();
+            return "B00" + rowCount.ToString();
+        }
+    }
 }

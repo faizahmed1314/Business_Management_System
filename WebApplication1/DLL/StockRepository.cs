@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication1.DatabaseContext;
 using WebApplication1.Models;
+using WebApplication1.Models.ViewModels.Stock;
 
 namespace WebApplication1.DLL
 {
@@ -11,29 +12,48 @@ namespace WebApplication1.DLL
     {
         BmsContext _db = new BmsContext();
 
-        public List<PurchaseDetails> GetAllPurchaseDetails()
+        public List<StockVm> GetAllStockDetails()
         {
-            return _db.PurchaseDetailses.ToList();
+            var result = from pd in _db.PurchaseDetailses
+                         join p in _db.Products on pd.ProductId equals p.Id
+                         join sd in _db.SaleDetailses on p.Id equals sd.Id
+                         select new StockVm
+                         {
+                             Name = p.Name,
+                             Code = p.Code,
+                             ReOrderLevel = p.ReOrderLevel,
+                             Category = p.Category.Name,
+                             ExpireDate = pd.ExpireDate,
+                             StockIn = pd.Quantity,
+                             StockOut = sd.Quantity,
+                             OpeningBalance = p.Quantity,
+                             ClosingBalance = p.Quantity - sd.Quantity
+                         };
+
+            return (result.ToList());
+        }
+        public List<StockVm> SearchStockDetails(string product, string category)
+        {
+            var result = from pd in _db.PurchaseDetailses
+                         join p in _db.Products.Where(c=>c.Name==product||c.Category.Name==category) on pd.ProductId equals p.Id
+                         join sd in _db.SaleDetailses on p.Id equals sd.Id
+                         select new StockVm
+                         {
+                             Name = p.Name,
+                             Code = p.Code,
+                             ReOrderLevel = p.ReOrderLevel,
+                             Category = p.Category.Name,
+                             ExpireDate = pd.ExpireDate,
+                             StockIn = pd.Quantity,
+                             StockOut = sd.Quantity,
+                             OpeningBalance = p.Quantity,
+                             ClosingBalance = p.Quantity - sd.Quantity
+                         };
+
+            return (result.ToList());
         }
 
-        public List<PurchaseDetails> SearchPurchaseDetails(string product, string category)
-        {
-            var data = _db.PurchaseDetailses.Where(c => c.Product.Name == product || c.Product.Category.Name == category).ToList();
-            return data;
-            
-        }
-        public int availableQuantitySum(int id)
-        {
-            int sum = 0;
-
-            var datalist = _db.PurchaseDetailses.Where(c => c.ProductId == id).ToList();
-
-            foreach (var q in datalist)
-            {
-                sum += q.Quantity;
-            }
-            return sum;
-
-        }
+        
+        
     }
 }

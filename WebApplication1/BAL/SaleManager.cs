@@ -21,19 +21,27 @@ namespace WebApplication1.BAL
         {
             return _saleRepository.GetCustomerById(id);
         }
-
-        public bool Update(Customer customer)
+        public Product GetProductByName(string name)
         {
-            return _saleRepository.Update(customer);
-        }
-        public List<PurchaseDetails> GetByProductId(int id)
-        {
-            return _saleRepository.GetByProductId(id);
+            return _saleRepository.GetProductByName(name);
         }
 
-        public List<Customer> GetByCustomerId(int id)
+        public bool UpdateCustomer(Customer customer)
         {
-            return _saleRepository.GetByCustomerId(id);
+            return _saleRepository.UpdateCustomer(customer);
+        }
+        public bool UpdateProduct(Product product)
+        {
+            return _saleRepository.UpdateProduct(product);
+        }
+        public List<Product> GetQuantityByProductId(int id)
+        {
+            return _saleRepository.GetQuantityByProductId(id);
+        }
+
+        public List<Customer> GetLoyaltyPointByCustomerId(int id)
+        {
+            return _saleRepository.GetLoyaltyPointByCustomerId(id);
         } 
 
         public List<SelectListItem> GetProductSelectListItems()
@@ -44,7 +52,16 @@ namespace WebApplication1.BAL
         public List<SelectListItem> GetCustomerSelectListItems()
         {
             return _saleRepository.GetCustomerSelectListItems();
-        } 
-    
+        }
+
+        internal List<Customer> GetAllCustomer()
+        {
+            return _saleRepository.GetAllCustomer();
+        }
+
+        internal List<Product> GetAllProduct()
+        {
+            return _saleRepository.GetAllProduct();
+        }
     }
 }

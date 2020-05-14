@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
                     product.UploadFile.InputStream.Read(fileByte, 0, product.UploadFile.ContentLength);
                     product.File = fileByte;
                     product.FileName = product.UploadFile.FileName;
-
+                    product.Quantity = 0;
                     var isSaved = _productManager.Save(product);
                     if (isSaved)
                     {

@@ -19,18 +19,18 @@
                     <div class="form-group">
                         @Html.LabelFor(c => c.CustomerId, "Customer *", new { @class = "control-label col-sm-2" })
                         <div class="col-sm-8">
-                            @Html.DropDownListFor(c => c.CustomerId, Model.CustomerLookup, null, new { @class = "form-control", @required = "required" })
+                            <select name="CustomerId" class="form-control" id="CustomerId" autofocus></select>
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.DateTime, "Date", new { @class = "control-label col-sm-2" })
                         <div class="col-sm-8">
-                            @Html.TextBoxFor(c => c.DateTime, null, new { @class = "form-control", @type="Date" })
+                            @Html.TextBoxFor(c => c.DateTime, null, new { @class = "form-control", @type = "Date" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Loyality Point</label>
-                        <div class="col-sm-8" >
+                        <div class="col-sm-8">
                             <input type="text" class="form-control" id="loyalityPoint" readonly="readonly">
                         </div>
                     </div>
@@ -49,12 +49,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Product</label>
                         <div class="col-sm-8">
-                            @Html.DropDownList("ItemName", Model.ProductLookup, new { @class = "form-control" })
+                            @*@Html.DropDownList("ItemName", Model.ProductLookup, new { @class = "form-control" })*@
+                            <select name="ItemName" class="form-control" id="ItemName" autofocus></select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Available Quantity</label>
-                        <div class="col-sm-8" >
+                        <div class="col-sm-8">
                             <input type="text" class="form-control" id="avQuantity" readonly="readonly">
                         </div>
                     </div>
@@ -101,22 +102,22 @@
                         </thead>
                         <tbody id="SaleDetailsTable">
                             @*@if (Model!=null && Model.SaleDetailses != null && Model.SaleDetailses.Count > 0)
-                            {
-                                 var sl = 0; 
-                                foreach (var item in Model.SaleDetailses)
                                 {
+                                     var sl = 0;
+                                    foreach (var item in Model.SaleDetailses)
+                                    {
 
-                                    <tr>
-                                        <td>@(++sl)</td>
-                                        <td>@item.ProductId</td>
-                                        <td>@item.Quantity</td>
-                                        <td>@item.UnitPrice</td>
-                                        
-                                    </tr>
-                                }
+                                        <tr>
+                                            <td>@(++sl)</td>
+                                            <td>@item.ProductId</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@item.UnitPrice</td>
+
+                                        </tr>
+                                    }
 
 
-                            }*@
+                                }*@
                         </tbody>
 
                     </table>
@@ -140,7 +141,7 @@
             </div>
 
             <div class="col-6 text-right">
-                <div >
+                <div>
                     <input type="submit" class="btn btn-success" value="Save" />
                 </div>
             </div>
@@ -153,6 +154,23 @@
 @section scripts{
 
     <script src="~/Scripts/ProjectScripts/Sale/SaleCreate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var save = '@TempData["save"]';
+            var edit = '@TempData["Edit"]';
+            var remove = '@TempData["delete"]';
+
+
+            if (save != '') {
+                alertify.success(save);
+            } else if (edit != '') {
+                alertify.success(edit);
+            } else if (remove != '') {
+                alertify.error(remove);
+            }
+
+        });
+    </script>
 }
 
 

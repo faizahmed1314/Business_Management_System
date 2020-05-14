@@ -24,7 +24,7 @@ namespace WebApplication1.DLL
             return false;
         }
 
-        public bool Update(Customer customer)
+        public bool UpdateCustomer(Customer customer)
         {
             _db.Entry(customer).State=EntityState.Modified;
             var rowAffected = _db.SaveChanges();
@@ -34,18 +34,49 @@ namespace WebApplication1.DLL
             }
             return false;
         }
+        public bool UpdateProduct(Product product)
+        {
+            var dataList=_db.SaleDetailses.Where(c => c.ProductId == product.Id).FirstOrDefault();
+            if (dataList != null)
+            {
+                product.Quantity = product.Quantity - dataList.Quantity;
+                _db.Entry(product).State = EntityState.Modified;
+                var rowAffected = _db.SaveChanges();
+                if (rowAffected > 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public Customer GetCustomerById(int id)
         {
             return _db.Customers.Where(c => c.Id == id).FirstOrDefault();
         }
-        public List<PurchaseDetails> GetByProductId(int id)
+
+        internal List<Customer> GetAllCustomer()
         {
-            return _db.PurchaseDetailses.Where(c => c.ProductId == id).ToList();
+            return _db.Customers.ToList();
+        }
+
+        internal List<Product> GetAllProduct()
+        {
+            return _db.Products.ToList();
+        }
+
+        public Product GetProductByName(string name)
+        {
+            return _db.Products.Where(c => c.Name == name).FirstOrDefault();
+        }
+        public List<Product> GetQuantityByProductId(int id)
+        {
+            return _db.Products.Where(c => c.Id == id).ToList();
         }
 
 
-        public List<Customer> GetByCustomerId(int id)
+        public List<Customer> GetLoyaltyPointByCustomerId(int id)
         {
             return _db.Customers.Where(c => c.Id == id).ToList();
         } 
